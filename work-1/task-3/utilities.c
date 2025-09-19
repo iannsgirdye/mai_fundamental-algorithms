@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 #include "utilities.h"
 #include "colors.h"
 
@@ -93,12 +94,22 @@ return_status convert_all_double_numbers(int argc, char* argv[], double numbers[
 return_status _convert_int_number(char* str_number, int* number) {
   char* endptr;
 
-  *number = (int)strtol(str_number, &endptr, 10);
+  long int converted_number = strtol(str_number, &endptr, 10);
   if (*endptr != '\0') {
     printf(COLOR_BOLD_RED "Ошибка: " COLOR_WHITE "некорректный формат целого числа.\n");
     return INVALID_ARGUMENT;
   }
 
+  if (converted_number < INT_MIN || converted_number > INT_MAX) {
+    printf(
+      COLOR_BOLD_RED "Ошибка: "
+      COLOR_WHITE    "целое число должно быть в диапозоне от %d до %d включительно.\n",
+      INT_MIN, INT_MAX
+    );
+    return INVALID_ARGUMENT;
+  }
+
+  *number = (int)converted_number;
   return OK;
 }
 
