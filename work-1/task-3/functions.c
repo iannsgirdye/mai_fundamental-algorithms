@@ -44,6 +44,7 @@ void flag_q(int argc, char* argv[]) {
 
   if (!found_results) {
     printf(" нет решений.");
+    return;
   }
 
   for (int i = 0; i < found_results; i++) {
