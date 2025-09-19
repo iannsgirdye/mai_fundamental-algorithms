@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "functions.h"
+#include "utilities.h"
 #include "colors.h"
 
 
