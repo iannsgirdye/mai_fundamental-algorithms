@@ -86,3 +86,25 @@ return_status convert_all_double_numbers(int argc, char* argv[], double numbers[
     }
   }
 }
+
+
+return_status _convert_int_number(char* str_number, int* number) {
+  char* endptr;
+
+  *number = (int)strtol(str_number, &endptr, 10);
+  if (*endptr != '\0') {
+    printf(COLOR_BOLD_RED "Ошибка: " COLOR_WHITE "некорректный формат целого числа.\n");
+    return INVALID_ARGUMENT;
+  }
+
+  return OK;
+}
+
+
+return_status convert_all_int_numbers(int argc, char* argv[], int numbers[]) {
+  for (int i = 0; i < argc - 2; i++) {
+    if (_convert_int_number(argv[i + 2], &numbers[i]) != OK) {
+      return INVALID_ARGUMENT;
+    }
+  }
+}

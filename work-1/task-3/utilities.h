@@ -20,4 +20,7 @@ return_status validate_arguments_count(int argc, char* argv[]);
 // Преобразование всех вещественных параметров флага
 void convert_all_double_numbers(int argc, char* argv[], double numbers[]); 
 
+// Преобразование всех целых параметров флага
+void convert_all_int_numbers(int argc, char* argv[], int numbers[]); 
+
 #endif
