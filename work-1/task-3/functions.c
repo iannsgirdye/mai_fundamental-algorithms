@@ -74,3 +74,34 @@ void flag_m(int argc, char* argv[]) {
     printf("первое число не кратко второму.\n");
   }
 }
+
+
+void flag_t(int argc, char* argv[]) {
+  double numbers[4];
+  convert_all_double_numbers(argc, argv, numbers);
+
+
+  if (numbers[1] <= 0 || numbers[2] <= 0 || numbers[3] <= 0) {
+    printf(COLOR_BOLD_RED "Ошибка: " COLOR_WHITE "длина должна быть больше нуля.\n");
+    return;
+  }
+
+
+  double epsilon = numbers[0];
+  for (int checks = 0; checks < 2; checks++) {
+    for (int i = 1; i < 3; i++) {
+      if (fabs(numbers[i] - numbers[i + 1]) < epsilon) {
+        double temp = numbers[i];
+        numbers[i] = numbers[i + 1];
+        numbers[i + 1] = temp;
+      }
+    }
+  }
+  
+  printf(COLOR_BOLD_GREEN "Результат: " COLOR_WHITE);
+  if (fabs(pow(numbers[1], 2) + pow(numbers[2], 2) - pow(numbers[3], 2)) < epsilon) {
+    printf("последние три параметра могут являться длинами сторон прямоугольного треугольника.\n");
+  } else {
+    printf("последние три параметра не могут являться длинами сторон прямоугольного треугольника.\n");
+  }
+}
