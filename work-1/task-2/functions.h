@@ -10,10 +10,10 @@ typedef enum {
 return_status get_T(int* T);
 
 // Считывание и валидация порядковый номеров нужных простых чисел
-return_status get_order(int order[], int T);
+return_status get_order(int order[], int T, int* min_order_number);
 
 // Поиск простых чисел
-void prime_numbers(int order[], int T, int results[]);
+void prime_numbers(int order[], int T, int results[], int* min_order_number);
 
 // Вывод результатов поиска простых чисел
 void print_results(int results[], int T);

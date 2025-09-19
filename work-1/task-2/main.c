@@ -1,5 +1,5 @@
 #include "functions.h"
-#include <stdio.h>
+#include <limits.h>
 
 
 int main() {
@@ -9,12 +9,13 @@ int main() {
   }
 
   int order[T];
-  if (get_order(order, T) == INVALID_ARGUMENT) {
+  int min_order_number = INT_MAX;
+  if (get_order(order, T, &min_order_number) == INVALID_ARGUMENT) {
     return 0;
   }
 
   int results[T];
-  prime_numbers(order, T, results);
+  prime_numbers(order, T, results, &min_order_number);
 
   print_results(results, T);
 

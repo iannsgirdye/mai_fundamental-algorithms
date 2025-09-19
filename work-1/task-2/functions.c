@@ -8,6 +8,7 @@
 
 
 #define MAX_LEN_NUMBER 10
+#define min(a, b) (a < b) ? a : b
 
 
 return_status get_number(int *number) {
@@ -47,7 +48,7 @@ return_status get_T(int *T) {
 }
 
 
-return_status get_order(int order[], int T) {
+return_status get_order(int order[], int T, int* min_order_number) {
   printf(
     COLOR_BOLD_CYAN "Введите порядковые номера простых чисел по-одному на каждой строке:\n"
     COLOR_WHITE
@@ -57,6 +58,8 @@ return_status get_order(int order[], int T) {
     if (get_number(&order[i]) == INVALID_ARGUMENT) {
       return INVALID_ARGUMENT;
     }
+
+    *min_order_number = min(*min_order_number, order[i]);
   }
   
   return OK;
@@ -74,18 +77,31 @@ bool is_prime(int n) {
 }
 
 
-void prime_numbers(int order[], int T, int results[]) {
-  int order_number = 0;
+void prime_numbers(int order[], int T, int results[], int* min_order_number) {
+  int current_order_number = 0;
   int found_numbers = 0;
+  int future_min_order_number = *min_order_number;
 
   for (int n = 2; found_numbers < T; n++) {
     if (is_prime(n)) {
-      order_number++;
-      for (int i = 0; i < T; i++) {
-        if (order[i] == order_number) {
-          results[i] = n;
-          found_numbers++;
+      current_order_number++;
+      
+      if (current_order_number == *min_order_number) {
+        for (int i = 0; i < T; i++) {
+          if (order[i] == current_order_number) {
+            order[i] = -1;
+            results[i] = n;
+            found_numbers++;
+          } else if (order[i] != -1) {
+            if (future_min_order_number == *min_order_number) {
+              future_min_order_number = order[i];
+            } else {
+              future_min_order_number = min(future_min_order_number, order[i]);
+            }
+          }
         }
+
+        *min_order_number = future_min_order_number;
       }
     }
   }
