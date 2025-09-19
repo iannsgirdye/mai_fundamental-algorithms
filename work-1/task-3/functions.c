@@ -9,7 +9,9 @@
 
 void flag_q(int argc, char* argv[]) {
   double numbers[4];
-  convert_all_double_numbers(argc, argv, numbers);
+  if (convert_all_double_numbers(argc, argv, numbers) != OK) {
+    return;
+  }
 
   double epsilon = numbers[0];
 
@@ -65,7 +67,9 @@ void flag_q(int argc, char* argv[]) {
 
 void flag_m(int argc, char* argv[]) {
   int numbers[2];
-  convert_all_int_numbers(argc, argv, numbers);
+  if (convert_all_int_numbers(argc, argv, numbers) != OK) {
+    return;
+  }
 
   printf(COLOR_BOLD_GREEN "Результат: " COLOR_WHITE);
 
@@ -79,14 +83,14 @@ void flag_m(int argc, char* argv[]) {
 
 void flag_t(int argc, char* argv[]) {
   double numbers[4];
-  convert_all_double_numbers(argc, argv, numbers);
-
+  if (convert_all_double_numbers(argc, argv, numbers) != OK) {
+    return;
+  }
 
   if (numbers[1] <= 0 || numbers[2] <= 0 || numbers[3] <= 0) {
     printf(COLOR_BOLD_RED "Ошибка: " COLOR_WHITE "длина должна быть больше нуля.\n");
     return;
   }
-
 
   double epsilon = numbers[0];
   for (int checks = 0; checks < 2; checks++) {
