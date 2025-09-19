@@ -85,6 +85,8 @@ return_status convert_all_double_numbers(int argc, char* argv[], double numbers[
       return INVALID_ARGUMENT;
     }
   }
+
+  return OK;
 }
 
 
@@ -107,4 +109,6 @@ return_status convert_all_int_numbers(int argc, char* argv[], int numbers[]) {
       return INVALID_ARGUMENT;
     }
   }
+
+  return OK;
 }
