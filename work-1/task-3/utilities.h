@@ -17,4 +17,7 @@ return_status error_invalid_count_of_arguments();
 // Валидация количества аргументов
 return_status validate_arguments_count(int argc, char* argv[]);
 
+// Преобразование всех вещественных параметров флага
+void convert_all_double_numbers(int argc, char* argv[], double numbers[]); 
+
 #endif

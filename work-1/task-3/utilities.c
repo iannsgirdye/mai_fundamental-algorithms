@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "utilities.h"
 #include "colors.h"
 
@@ -62,4 +63,26 @@ return_status validate_arguments_count(int argc, char* argv[]) {
   }
 
   return OK;
+}
+
+
+return_status _convert_double_number(char* str_number, double* number) {
+  char* endptr;
+
+  *number = strtod(str_number, &endptr);
+  if (*endptr != '\0') {
+    printf(COLOR_BOLD_RED "Ошибка: " COLOR_WHITE "некорректный формат вещественного числа.\n");
+    return INVALID_ARGUMENT;
+  }
+
+  return OK;
+}
+
+
+return_status convert_all_double_numbers(int argc, char* argv[], double numbers[]) {
+  for (int i = 0; i < argc - 2; i++) {
+    if (_convert_double_number(argv[i + 2], &numbers[i]) != OK) {
+      return INVALID_ARGUMENT;
+    }
+  }
 }
