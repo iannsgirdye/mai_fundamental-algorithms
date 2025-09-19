@@ -60,3 +60,17 @@ void flag_q(int argc, char* argv[]) {
 
   printf("\n");
 }
+
+
+void flag_m(int argc, char* argv[]) {
+  int numbers[2];
+  convert_all_int_numbers(argc, argv, numbers);
+
+  printf(COLOR_BOLD_GREEN "Результат: " COLOR_WHITE);
+
+  if (numbers[0] % numbers[1] == 0) {
+    printf("первое число кратко второму.\n");
+  } else {
+    printf("первое число не кратко второму.\n");
+  }
+}
