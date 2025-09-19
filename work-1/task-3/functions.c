@@ -13,7 +13,7 @@ void flag_q(int argc, char* argv[]) {
     return;
   }
 
-  double epsilon = numbers[0];
+  const double epsilon = numbers[0];
 
   double results[12];
   bool repeated_results[12] = {false};
@@ -92,7 +92,7 @@ void flag_t(int argc, char* argv[]) {
     return;
   }
 
-  double epsilon = numbers[0];
+  const double epsilon = numbers[0];
   for (int checks = 0; checks < 2; checks++) {
     for (int i = 1; i < 3; i++) {
       if (fabs(numbers[i] - numbers[i + 1]) < epsilon) {
