@@ -9,12 +9,12 @@ typedef enum {
 } return_status;
 
 // Проверка количества аргументов, вывод информации о программе при необходимости
-return_status validate_arguments_count(int argc, char* argv[]);
+return_status validate_arguments_count(const int argc, char* argv[]);
 
 // Валидация и определение числа x
-return_status validate_x(char *str_x, int* x);
+return_status validate_x(const char *str_x, int* x);
 
 // Валидация и определение флага
-return_status validate_flag(char *str_flag, char* flag);
+return_status validate_flag(const char *str_flag, char* flag);
 
 #endif

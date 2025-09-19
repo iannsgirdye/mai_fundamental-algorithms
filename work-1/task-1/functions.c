@@ -5,7 +5,7 @@
 #include "colors.h"
 
 
-void flag_h(int x) {
+void flag_h(const int x) {
   bool have_number = false;
   
   printf(COLOR_BOLD_GREEN "Результат: " COLOR_WHITE);
@@ -27,7 +27,7 @@ void flag_h(int x) {
 }
 
 
-return_status flag_p(int x) {
+return_status flag_p(const int x) {
   for (int n = 2; n <= x * 0.5; n++) {
     if (x % n == 0) {
       printf(
@@ -74,7 +74,7 @@ return_status flag_s(int x) {
 }
 
 
-return_status flag_e(int x) {
+return_status flag_e(const int x) {
   if (x > 10) {
     printf(
       COLOR_BOLD_RED "Ошибка: "
@@ -101,13 +101,13 @@ return_status flag_e(int x) {
   return OK;
 }
 
-void flag_a(int x) {
+void flag_a(const int x) {
   double result = ((1 + x) / 2.0) * x;
   printf(COLOR_BOLD_GREEN "Результат: " COLOR_WHITE "%ld\n", (long int)result);
 }
 
 
-return_status flag_f(int x) {
+return_status flag_f(const int x) {
   if (x > 20) {
     printf(
       COLOR_BOLD_RED "Ошибка: "

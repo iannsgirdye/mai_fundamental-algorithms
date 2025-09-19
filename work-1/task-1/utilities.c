@@ -6,7 +6,7 @@
 #include "colors.h"
 
 
-return_status validate_arguments_count(int argc, char* argv[]) {
+return_status validate_arguments_count(const int argc, char* argv[]) {
   if (argc == 2 && (strcmp(argv[1], "-i") == 0 || strcmp(argv[1], "--info") == 0)) {
     printf(
       "Формат: <программа> <натуральное число> <флаг>\n\n"
@@ -36,7 +36,7 @@ return_status validate_arguments_count(int argc, char* argv[]) {
 }
 
 
-return_status validate_x(char* str_x, int* x) {
+return_status validate_x(const char* str_x, int* x) {
   char* endptr;
   long int converted_x = strtol(str_x, &endptr, 10);
 
@@ -61,7 +61,7 @@ return_status validate_x(char* str_x, int* x) {
 }
 
 
-return_status validate_flag(char* str_flag, char* flag) {
+return_status validate_flag(const char* str_flag, char* flag) {
   if (strlen(str_flag) != 2) {
     printf(
       COLOR_BOLD_RED "Ошибка: "
