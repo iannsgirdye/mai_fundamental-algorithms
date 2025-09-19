@@ -83,6 +83,8 @@ return_status flag_e(int x) {
     return INCORRECT_ARGUMENT_VALUE;
   }
 
+  printf(COLOR_BOLD_GREEN "Результат:\n" COLOR_WHITE);
+
   for (int base = 1; base <= 10; base++) {
     unsigned long long int result = base;
     for (int degree = 1; degree <= x; degree++) {
@@ -101,7 +103,7 @@ return_status flag_e(int x) {
 
 void flag_a(int x) {
   double result = ((1 + x) / 2.0) * x;
-  printf("%ld\n", (long int)result);
+  printf(COLOR_BOLD_GREEN "Результат: " COLOR_WHITE "%ld\n", (long int)result);
 }
 
 
@@ -119,6 +121,6 @@ return_status flag_f(int x) {
     result *= i;
   }
 
-  printf("%lld\n", result);
+  printf(COLOR_BOLD_GREEN "Результат: " COLOR_WHITE "%lld\n", result);
   return OK;
 }
