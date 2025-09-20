@@ -1,0 +1,266 @@
+# Лабораторные работы
+
+
+## 2025.09.20
+Компилятор по умолчанию подставляет в функцию `main()` `return 0`; и тип возвращаемого значения `int`.
+
+
+### Арифметические операции и циклы, условный оператор
+**Неопределённое поведение**
+``` c
+int i = 5;
+printf("%d%d%d", i--, i, i++); // слева направо 5 4 4, справа налево 6 6 5
+```
+
+**Вывести сумму чисел от `1` до `n`**
+``` c
+#include <stdio.h>
+
+int main(void) {
+  int n = 0, sum = 0;  // без "= 0" в памяти будет старая информация
+  scanf("%d", &n);
+
+  for (int i = 1; i <= n; i++) {
+    sum += i;
+  }
+
+  printf("%d\n", sum);
+  return 0;
+}
+```
+
+`for( ; ; ) {}` отработает нормально.
+
+Переменные внутри цикла и условных операторов лучше не объявлять.
+
+
+**Является ли натуральное число `n` простым**
+``` c
+
+#include <stdio.h>
+#include <stdbool.h>
+
+
+bool isPrime(int n) {
+  if (n == 2) {
+    return true;
+  }
+
+  if (n % 2 == 0) {
+    return false;
+  }
+
+  for (int d = 3; d * d <= n; d +=2) {
+    if (n % d == 0) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+
+int main(void) {
+  int n;
+  scanf("%d", &n);
+
+  if (isPrime(n)) {
+    printf("%d — простое\n", n);
+  } else {
+    printf("%d — составное\n", n);
+  }
+
+  return 0;
+}
+
+// единственное, что не проверяем единицу.
+```
+
+Все простые числа можно представить в виде `6n + 1` или `6n - 1`.
+
+
+### Указатели
+**Поменять значения переменных местами**
+```c
+void swap(int* a, int* b) {
+  int temp = *a;
+  *a = *b;
+  *b = temp;
+}
+
+
+int main() {
+  int a, b;
+  scanf("%d%d", &a, &b);
+  swap(&a, &b);
+
+  return 0;
+}
+```
+
+
+### Массивы
+```c
+int arr[5];              // {мусор, мусор, мусор, мусор, мусор}
+
+int arr[5] = {};         // {0, 0, 0, 0, 0}
+
+int arr[5] = {3, 5};     // {3, 5, 0, 0, 0}
+
+int arr[5] = {[3] = 5};  // {0, 0, 0, 5, 0}
+```
+
+
+**Найти минимальный элементв в массиве**
+```c
+#include <stdio.h>
+
+int main() {
+  int arr[] = {1, 2, 5, -3, 0};
+  int min = arr[0];
+  int n = 5;
+
+  // невероятная оптимизация одной проверки
+  for (int i = 1; i < n; i++) {
+    if (min > arr[i]) {
+      min = arr[i];
+    }
+  }
+    
+  printf("%d\n", min);
+  return 0;
+}
+
+```
+
+`sizeof():`
+- укажет реальный размер массива, если вызывается в области видимости массива
+- укажет размер указателя в противном случае
+
+
+```c
+#include <stdio.h> 
+
+void reverseArray(int* array, int n) {
+  int temp;
+
+  for (int i = 0; i < n / 2; i++) {
+    temp = array[i];
+    array[i] = array[n - 1 - i];
+    array[n - 1 - i] = temp;
+  }
+
+int main() {
+  int array[5] = {10, 20, 30, 40, 50};
+  reverseArray(array, 5);
+
+  return 0;
+}
+
+}
+```
+
+
+### Строки
+``` c
+int main() {
+  char str[3];
+  str[0] = 'h';
+  str[1] = 'a';
+  str[2] = 'h';  // вместо терминирующего символа,
+  printf("%s\n", str);  // segmentation fault
+}
+```
+
+``` c
+int main() {
+  char str[] = "Hello";  // размер будет равен 6
+  
+  for (int i = 0; str[i] != '\0'; i++) {}
+
+  return 0;
+}
+```
+
+
+### Динамическая память
+``` c
+#include <stdio.h>
+#include <stdlib.h>
+
+
+void fillSquare(int* array, size_t size);
+void printArray(int* array, size_t size);
+
+
+int main() {
+  int n = 0;
+  scanf("%d", &n);
+
+  int* p = (int*)malloc(sizeof(int) * n);  // calloc(), если нужно заменить массив на нули
+  if (p == NULL) {
+    return 0;
+  }
+
+  fillSquare(p, n);
+  printArray(p, n);
+
+  free(p);
+
+  return 0;
+}
+
+
+void fillSquare(int* array, size_t size) {
+  for (int i = 0; i < size; i++) {
+    *(array + i) = i * i;
+  }
+}
+
+
+void printArray(int *array, size_t size) {
+  for (int i = 0; i < size; i++) {
+    if (i > 0) {
+      printf(" ");
+    }
+    printf("%d", *(array + i));
+  }
+
+  printf("\n");
+}
+```
+
+**Считать строку неопределённой длины**
+
+#define BUFFER 10
+
+``` c
+char* readline() {
+  size_t size = BUFFER;  // изначальный размер массива
+  char *c = getchar();   // считывание первого символа
+  size_t n = 0;          // индекса последнего считанного символа
+
+  char *p = (char*)malloc(sizeof(char) * size);
+  if (!p) {
+    return NULL;
+  }
+
+  while ((c != EOF) && (с != '\n')) {  // пока не конец строки или всего файла
+    if (n == size - 1) {                     // если массив полностью заполнен
+      size *= 2;
+      char* tmp = (char*)realloc(p, size);
+      if (!tmp) {
+        free(p);
+        return NULL
+      }
+      p = tmp;
+    }
+    
+    *(p + n) = c;   // записываем на p[n] место считанный ранее символ
+    n++;            // увеличиваем количество считанных символов
+    c = getchar();  // считываем очередной символ
+  }
+
+  return *p
+}
+```
