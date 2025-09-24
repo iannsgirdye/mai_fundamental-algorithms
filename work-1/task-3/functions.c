@@ -19,16 +19,17 @@ void flag_q(int argc, char* argv[]) {
   bool repeated_results[12] = {false};
   int found_results = 0;
 
+  double a, b, c, D;
   for (int i = 1; i < 4; i++) {
-    double a = numbers[i];
+    a = numbers[i];
     for (int j = 1; j < 4; j++) {
       if (i != j) {
-        double b = numbers[j];
+        b = numbers[j];
         for (int k = 1; k < 4; k++) {
           if (i != k && j != k) {
-            double c = numbers[k];
+            c = numbers[k];
             
-            double D = b * b - 4 * a * c;
+            D = b * b - 4 * a * c;
             if (D >= 0) {
               results[found_results] = (-b + sqrt(D)) / (2 * a);
               found_results++;
