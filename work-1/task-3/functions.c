@@ -94,10 +94,11 @@ void flag_t(int argc, char* argv[]) {
   }
 
   const double epsilon = numbers[0];
+  double temp;
   for (int checks = 0; checks < 2; checks++) {
     for (int i = 1; i < 3; i++) {
       if (fabs(numbers[i] - numbers[i + 1]) < epsilon) {
-        double temp = numbers[i];
+        temp = numbers[i];
         numbers[i] = numbers[i + 1];
         numbers[i + 1] = temp;
       }
