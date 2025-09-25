@@ -6,7 +6,7 @@
 
 
 returnStatus validateCountOfArguments(int argc, char* argv[]) {
-  if (argc < 2 || argc > 3) {
+  if (argc < 2 || argc > 4) {
     printf(
       COLOR_BOLD_RED "Ошибка: "
       COLOR_WHITE "введено некорректное количество аргументов "
@@ -15,7 +15,7 @@ returnStatus validateCountOfArguments(int argc, char* argv[]) {
     return INVALID_COUNT_OF_ARGUMENTS;
   }
 
-  if (argv[1][1] == 'n' && strlen(argv[1]) == 3 && argc == 2) {
+  if (argv[1][1] == 'n' && strlen(argv[1]) == 3 && argc < 3) {
     printf(
       COLOR_BOLD_RED "Ошибка: "
       COLOR_WHITE "введено некорректное количество аргументов "
