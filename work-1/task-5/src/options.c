@@ -12,13 +12,8 @@ returnStatus optionD(char inputFileName[], char outputFileName[]) {
   }
 
   FILE* outputFile;
-  if (strlen(outputFileName) > 0) {
-    outputFile = fopen(outputFileName, "w");
-    if (checkFileOpening(outputFile, "выходной") != OK) {
-      return INVALID_ARGUMENT;
-    }
-  } else {
-    outputFile = stdout;
+  if (openOutputFile(&outputFile, outputFileName) != OK) {
+    return INVALID_FILE;
   }
 
   char symbol;

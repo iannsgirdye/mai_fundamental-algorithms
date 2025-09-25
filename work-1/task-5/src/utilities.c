@@ -106,3 +106,17 @@ returnStatus checkFileOpening(const FILE* file, const char fileType[]) {
 
   return OK;
 }
+
+
+returnStatus openOutputFile(FILE** outputFile, const char outputFileName[]) {
+  if (strlen(outputFileName) > 0) {
+    *outputFile = fopen(outputFileName, "w");
+    if (checkFileOpening(*outputFile, "выходной") != OK) {
+      return INVALID_FILE;
+    }
+  } else {
+    *outputFile = stdout;
+  }
+
+  return OK;
+}
