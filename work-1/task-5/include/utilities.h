@@ -2,6 +2,9 @@
 #define UTILITIES_H
 
 
+#include <stdbool.h>
+
+
 typedef enum {
   OK,
   INVALID_COUNT_OF_ARGUMENTS,
@@ -10,6 +13,7 @@ typedef enum {
 
 
 returnStatus validateCountOfArguments(int argc, char* argv[]);
+returnStatus validateFlag(const char flag[], char* mode, bool* haveOutputFile);
 
 
 #endif
