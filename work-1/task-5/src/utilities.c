@@ -2,6 +2,7 @@
 #include "../include/colors.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <stdbool.h>
 
 
@@ -66,4 +67,28 @@ returnStatus validateFlag(const char flag[], char* mode, bool* haveOutputFile) {
   }
 
   return OK;
+}
+
+
+returnStatus defineOutputFileName(char** outputFileName, int argc, char* argv[]) {
+  switch (argc) {
+    case 4:
+      *outputFileName = argv[3];
+      return OK;
+    case 3:
+      const char* beginOutputFileName = "out_";
+      char* tmpOutputFileName = (char*)malloc(strlen(beginOutputFileName) + strlen(argv[2]));
+      if (tmpOutputFileName == NULL) {
+        printf(
+          COLOR_BOLD_RED "Ошибка: "
+          COLOR_WHITE "не удалось выделить память при формировании имени выходного файла.\n");
+        return MEMORY_ERROR;
+      }
+      strcpy(tmpOutputFileName, beginOutputFileName);
+      strcat(tmpOutputFileName, argv[2]);
+      *outputFileName = tmpOutputFileName;
+      return OK;
+    default:
+      return OK;
+  }
 }

@@ -8,12 +8,14 @@
 typedef enum {
   OK,
   INVALID_COUNT_OF_ARGUMENTS,
-  INVALID_ARGUMENT
+  INVALID_ARGUMENT,
+  MEMORY_ERROR
 } returnStatus;
 
 
 returnStatus validateCountOfArguments(int argc, char* argv[]);
 returnStatus validateFlag(const char flag[], char* mode, bool* haveOutputFile);
+returnStatus defineOutputFileName(char** outputFileName, int argc, char* argv[]);
 
 
 #endif
