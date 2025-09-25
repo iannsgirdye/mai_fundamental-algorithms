@@ -2,6 +2,7 @@
 #include "../include/options.h"
 #include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
 #include <stdio.h>
 
 
@@ -39,7 +40,9 @@ int main(int argc, char* argv[]) {
 
   /* строка outputFileName хранится в динамической памяти,
   которая выделяется в функции defineOutputFileName */
-  free(outputFileName);
+  if (strlen(outputFileName) > 0) {
+    free(outputFileName);
+  }
 
   return 0;
 }
