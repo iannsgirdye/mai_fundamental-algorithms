@@ -64,4 +64,6 @@ returnStatus validateFlag(const char flag[], char* mode, bool* haveOutputFile) {
       );
       return INVALID_ARGUMENT;
   }
+
+  return OK;
 }
