@@ -10,7 +10,7 @@ returnStatus validateCountOfArguments(int argc, char* argv[]) {
     printf(
       COLOR_BOLD_RED "Ошибка: "
       COLOR_WHITE " введено некорректное количество аргументов. "
-      "(справка: флаг \"-h\")."
+      "(справка: флаг \"-h\").\n"
     );
     return INVALID_COUNT_OF_ARGUMENTS;
   }
@@ -19,7 +19,7 @@ returnStatus validateCountOfArguments(int argc, char* argv[]) {
     printf(
       COLOR_BOLD_RED "Ошибка: "
       COLOR_WHITE " введено некорректное количество аргументов "
-      "(справка: флаг \"-h\")."
+      "(справка: флаг \"-h\").\n"
     );
     return INVALID_COUNT_OF_ARGUMENTS;
   }
@@ -34,7 +34,7 @@ returnStatus validateFlag(const char flag[], char* mode, bool* haveOutputFile) {
   if (flag[0] != '-' && flag[0] != '/') {
     printf(
       COLOR_BOLD_RED "Ошибка: "
-      COLOR_WHITE "флаг не введён."
+      COLOR_WHITE "флаг не введён.\n"
     );
     return INVALID_ARGUMENT;
   }
@@ -42,7 +42,7 @@ returnStatus validateFlag(const char flag[], char* mode, bool* haveOutputFile) {
   if (flagLen < 2 || flagLen > 3) {
     printf(
       COLOR_BOLD_RED "Ошибка: "
-      COLOR_WHITE "флаг введён в некорректном формате."
+      COLOR_WHITE "флаг введён в некорректном формате.\n"
     );
     return INVALID_ARGUMENT;
   }
@@ -60,7 +60,7 @@ returnStatus validateFlag(const char flag[], char* mode, bool* haveOutputFile) {
     default:
       printf(
         COLOR_BOLD_RED "Ошибка: "
-        COLOR_WHITE "введён несуществующий флаг"
+        COLOR_WHITE "введён несуществующий флаг.\n"
       );
       return INVALID_ARGUMENT;
   }
