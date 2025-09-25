@@ -92,3 +92,17 @@ returnStatus defineOutputFileName(char** outputFileName, int argc, char* argv[])
       return OK;
   }
 }
+
+
+returnStatus checkFileOpening(const FILE* file, const char fileType[]) {
+  if (file == NULL) {
+    printf(
+      COLOR_BOLD_RED "Ошибка: "
+      COLOR_WHITE "не удалось открыть %s файл.\n",
+      fileType
+    );
+    return INVALID_FILE;
+  }
+
+  return OK;
+}
