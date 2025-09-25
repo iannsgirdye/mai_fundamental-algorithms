@@ -24,10 +24,7 @@ returnStatus optionD(char inputFileName[], char outputFileName[]) {
   }
 
   fclose(inputFile);
-  if (strlen(outputFileName) > 0) {
-    fclose(outputFile);
-  }
-
-  printf("\n");
+  closeOutputFile(outputFile);
+  
   return OK;
 }

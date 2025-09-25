@@ -120,3 +120,14 @@ returnStatus openOutputFile(FILE** outputFile, const char outputFileName[]) {
 
   return OK;
 }
+
+
+returnStatus closeOutputFile(FILE* outputFile) {
+  if (outputFile != stdout) {
+    fclose(outputFile);
+  } else {
+    printf("\n");
+  }
+
+  return OK;
+}
