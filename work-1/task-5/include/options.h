@@ -8,6 +8,7 @@
 returnStatus optionD(char inputFileName[], char outputFileName[]);
 returnStatus optionI(char inputFileName[], char outputFileName[]);
 returnStatus optionS(char inputFileName[], char outputFileName[]);
+returnStatus optionA(char inputFileName[], char outputFileName[]);
 
 
 #endif

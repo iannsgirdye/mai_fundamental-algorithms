@@ -96,3 +96,30 @@ returnStatus optionS(char inputFileName[], char outputFileName[]) {
 
   return OK;
 }
+
+
+returnStatus optionA(char inputFileName[], char outputFileName[]) {
+  FILE* inputFile = fopen(inputFileName, "r");
+  if (checkFileOpening(inputFile, "входной") != OK) {
+    return INVALID_FILE;
+  }
+
+  FILE* outputFile;
+  if (openOutputFile(&outputFile, outputFileName) != OK) {
+    return INVALID_FILE;
+  }
+
+  char symbol;
+  while ((symbol = fgetc(inputFile)) != EOF) {
+    if (isdigit(symbol)) {
+      fputc(symbol, outputFile);
+    } else {
+      fprintf(outputFile, "%X", symbol);
+    }
+  }
+
+  fclose(inputFile);
+  closeOutputFile(outputFile);
+
+  return OK;
+}
