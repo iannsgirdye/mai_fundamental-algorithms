@@ -70,22 +70,44 @@ returnStatus validateFlag(const char flag[], char* mode, bool* haveOutputFile) {
 }
 
 
+size_t _defineIndexOfBeginOfFileName(const char fileName[]) {
+  size_t indexOfBeginOfFileName = 0;
+  for (size_t i = 0; fileName[i] != '\0'; ++i) {
+    if (fileName[i] == '\\' || fileName[i] == '/') {
+      indexOfBeginOfFileName = i + 1;
+    }
+  }
+  return indexOfBeginOfFileName;
+}
+
+
 returnStatus defineOutputFileName(char** outputFileName, int argc, char* argv[]) {
   switch (argc) {
     case 4:
       *outputFileName = argv[3];
       return OK;
     case 3:
-      const char* beginOutputFileName = "out_";
-      char* tmpOutputFileName = (char*)malloc(strlen(beginOutputFileName) + strlen(argv[2]));
+      const char* inputFileName = argv[2];
+      const char* beginOfOutputFileName = "out_";
+      size_t sizeOfBeginOfOutputFileName = strlen(beginOfOutputFileName);
+      size_t sizeOfOutputFileName = sizeOfBeginOfOutputFileName + strlen(inputFileName);
+      char* tmpOutputFileName = (char*)malloc(sizeOfOutputFileName);
+
       if (tmpOutputFileName == NULL) {
         printf(
           COLOR_BOLD_RED "Ошибка: "
           COLOR_WHITE "не удалось выделить память при формировании имени выходного файла.\n");
         return MEMORY_ERROR;
       }
-      strcpy(tmpOutputFileName, beginOutputFileName);
-      strcat(tmpOutputFileName, argv[2]);
+
+      size_t indexOfBeginOfInputFileName = _defineIndexOfBeginOfFileName(inputFileName);
+      strncpy(tmpOutputFileName, inputFileName, indexOfBeginOfInputFileName);
+      strcat(tmpOutputFileName, beginOfOutputFileName);
+      for (size_t i = indexOfBeginOfInputFileName; inputFileName[i] != '\0'; ++i) {
+        tmpOutputFileName[i + sizeOfBeginOfOutputFileName] = inputFileName[i];
+      }
+      
+      tmpOutputFileName[sizeOfOutputFileName] = '\0';
       *outputFileName = tmpOutputFileName;
       return OK;
     default:
