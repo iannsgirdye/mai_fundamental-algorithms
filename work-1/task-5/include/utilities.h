@@ -19,7 +19,7 @@ returnStatus validateCountOfArguments(int argc, char* argv[]);
 returnStatus validateFlag(const char flag[], char* mode, bool* haveOutputFile);
 returnStatus defineOutputFileName(char** outputFileName, int argc, char* argv[]);
 returnStatus checkFileOpening(const FILE* file, const char fileType[]);
-returnStatus openOutputFile(FILE** outputFileg, const char outputFileName[]);
+returnStatus openOutputFile(FILE** outputFile, const char outputFileName[]);
 returnStatus closeOutputFile(FILE *outputFile);
 
 
