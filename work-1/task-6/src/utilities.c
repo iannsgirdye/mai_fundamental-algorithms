@@ -5,7 +5,7 @@
 #include <string.h>
 
 
-void printHelp() {
+void _printHelp() {
   printf("Формат ввода: <программа> <вещественное число epsilon>\n");
 }
 
@@ -25,7 +25,7 @@ returnStatus validateCountOfArguments(int argc) {
 
 returnStatus validateSecondArgument(char* argv[], double* epsilon) {
   if (strcmp(argv[1], "-h") == 0) {
-    printHelp();
+    _printHelp();
     return HELP_USAGE;
   }
 

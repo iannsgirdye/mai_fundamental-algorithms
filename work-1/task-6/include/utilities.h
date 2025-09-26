@@ -10,7 +10,6 @@ typedef enum {
 } returnStatus;
 
 
-void help();
 returnStatus validateCountOfArguments(int argc);
 returnStatus validateSecondArgument(char* argv[], double* epsilon);
 
