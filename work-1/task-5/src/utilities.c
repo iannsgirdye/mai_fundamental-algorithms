@@ -29,7 +29,7 @@ returnStatus validateCountOfArguments(int argc, char* argv[]) {
     return HELP_USAGE;
   }
 
-  if (argc < 2 || argc > 4) {
+  if (argc < 3 || argc > 4) {
     printf(
       COLOR_BOLD_RED "Ошибка: "
       COLOR_WHITE "введено некорректное количество аргументов "
