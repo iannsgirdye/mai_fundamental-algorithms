@@ -43,10 +43,11 @@ returnStatus optionI(char inputFileName[], char outputFileName[]) {
 
   char symbol;
   int countOfAlpha = 0;
+  char strCountOfAlpha[11];
   while ((symbol = fgetc(inputFile)) != EOF) {
     if (symbol == '\n') {
-      fputc(countOfAlpha + '0', outputFile);
-      fputc('\n', outputFile);
+      sprintf(strCountOfAlpha, "%d", countOfAlpha);
+      fprintf(outputFile, "%s\n", strCountOfAlpha);
       countOfAlpha = 0;
     } else if (isalpha(symbol)) {
       countOfAlpha++;
@@ -54,7 +55,8 @@ returnStatus optionI(char inputFileName[], char outputFileName[]) {
   }
 
   if (symbol != '\n') {
-    fputc(countOfAlpha + '0', outputFile);
+    sprintf(strCountOfAlpha, "%d", countOfAlpha);
+    fprintf(outputFile, "%s", strCountOfAlpha);
   }
 
   fclose(inputFile);
@@ -77,10 +79,11 @@ returnStatus optionS(char inputFileName[], char outputFileName[]) {
 
   char symbol;
   int countOfNecessarySymbols = 0;
+  char strCountOfNecessarySymbols[11];
   while ((symbol = fgetc(inputFile)) != EOF) {
     if (symbol == '\n') {
-      fputc(countOfNecessarySymbols + '0', outputFile);
-      fputc('\n', outputFile);
+      sprintf(strCountOfNecessarySymbols, "%d", countOfNecessarySymbols);
+      fprintf(outputFile, "%s\n", strCountOfNecessarySymbols);
       countOfNecessarySymbols = 0;
     } else if (!isalpha(symbol) && !isdigit(symbol) && !isspace(symbol)) {
       countOfNecessarySymbols++;
@@ -88,7 +91,8 @@ returnStatus optionS(char inputFileName[], char outputFileName[]) {
   }
 
   if (symbol != '\n') {
-    fputc(countOfNecessarySymbols + '0', outputFile);
+    sprintf(strCountOfNecessarySymbols, "%d", countOfNecessarySymbols);
+    fprintf(outputFile, "%s", strCountOfNecessarySymbols);
   }
 
   fclose(inputFile);
