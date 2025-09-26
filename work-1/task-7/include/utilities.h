@@ -4,7 +4,9 @@
 
 typedef enum {
   OK,
-  INVALID_COUNT_OF_ARGUMENTS
+  INVALID_COUNT_OF_ARGUMENTS,
+  INVALID_FILE,
+  INVALID_DATA_IN_FILE
 } returnStatus;
 
 
