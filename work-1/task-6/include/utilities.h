@@ -8,6 +8,7 @@ typedef enum {
 } returnStatus;
 
 
+void help();
 returnStatus validateCountOfArguments(int argc);
 
 
