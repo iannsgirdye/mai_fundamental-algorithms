@@ -8,4 +8,7 @@ typedef enum {
 } returnStatus;
 
 
+returnStatus getSystem(int *number);
+
+
 #endif
