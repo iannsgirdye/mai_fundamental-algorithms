@@ -134,11 +134,13 @@ returnStatus converter(const char inputFileName[], const char outputFileName[]) 
     } 
 
     else if (isspace(_inputedSymbol.symbol)) {
-      if (_convertNumberToTenSystem(&_fixedNumber) != OK) {
-        return INVALID_DATA_IN_FILE;
+      if (_fixedNumber.strNumberLen > 0) {
+        if (_convertNumberToTenSystem(&_fixedNumber) != OK) {
+          return INVALID_DATA_IN_FILE;
+        }
+        _printNumberData(outputFile, &_fixedNumber);
+        _initDataOfFixedNumber(&_fixedNumber);
       }
-      _printNumberData(outputFile, &_fixedNumber);
-      _initDataOfFixedNumber(&_fixedNumber);
     } 
     
     else {
