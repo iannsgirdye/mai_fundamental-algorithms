@@ -5,9 +5,9 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-
 typedef enum {
   OK,
+  HELP_USAGE,
   INVALID_COUNT_OF_ARGUMENTS,
   INVALID_ARGUMENT,
   MEMORY_ERROR,
@@ -15,6 +15,7 @@ typedef enum {
 } returnStatus;
 
 
+void printHelp();
 returnStatus validateCountOfArguments(int argc, char* argv[]);
 returnStatus validateFlag(const char flag[], char* mode, bool* haveOutputFile);
 returnStatus defineOutputFileName(char** outputFileName, int argc, char* argv[]);
