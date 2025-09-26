@@ -6,7 +6,7 @@
 
 
 void _printHelp() {
-  printf("Формат ввода: <программа> <вещественное число epsilon>\n");
+  printf("Формат ввода: <программа> <вещественное положительное число epsilon>\n");
 }
 
 
@@ -30,7 +30,7 @@ returnStatus validateSecondArgument(char* argv[], double* epsilon) {
   }
 
   char* endptr;
-  double strEpsilon = strtod(argv[1], &endptr);
+  double tmpEpsilon = strtod(argv[1], &endptr);
   if (*endptr != '\0') {
     printf(
       COLOR_BOLD_RED "Ошибка: "
@@ -39,6 +39,14 @@ returnStatus validateSecondArgument(char* argv[], double* epsilon) {
     return INVALID_ARGUMENT;
   }
 
-  *epsilon = strEpsilon;
+  if (tmpEpsilon < 0.0) {
+    printf(
+      COLOR_BOLD_RED "Ошибка: "
+      COLOR_WHITE "число epsilon должно быть вещественным и положительным.\n"
+    );
+    return INVALID_ARGUMENT;
+  }
+
+  *epsilon = tmpEpsilon;
   return OK;
 }
