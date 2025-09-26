@@ -4,7 +4,8 @@
 
 typedef enum {
   OK,
-  INVALID_VALUE
+  INVALID_VALUE,
+  INVALID_FORMAT
 } returnStatus;
 
 
