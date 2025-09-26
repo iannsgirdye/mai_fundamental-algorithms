@@ -51,17 +51,16 @@ returnStatus _errorIntOverflow() {
 }
 
 
-returnStatus _fixNumberData(
-  struct inputedSymbol* _inputedSymbol, 
-  struct fixedNumber* _fixedNumber, 
-  char startLetter
-) {
+returnStatus _fixNumberData(struct inputedSymbol* _inputedSymbol, struct fixedNumber* _fixedNumber) {
   if (_fixedNumber->strNumberLen == 32) {
     return _errorIntOverflow();
   }
 
-  _inputedSymbol->system = _inputedSymbol->symbol - startLetter;
-  _inputedSymbol->system += (startLetter == '0') ? 1 : 11;
+  if (isdigit(_inputedSymbol->symbol)) {
+    _inputedSymbol->system = _inputedSymbol->symbol - '0' + 1;
+  } else {
+    _inputedSymbol->system = toupper(_inputedSymbol->symbol) - 'A' + 11;
+  }
   _fixedNumber->system = max(_inputedSymbol->system, _fixedNumber->system);
   _fixedNumber->strNumber[_fixedNumber->strNumberLen] = _inputedSymbol->symbol;
   _fixedNumber->strNumberLen++;
@@ -75,7 +74,7 @@ returnStatus _convertNumberToTenSystem(struct fixedNumber* _fixedNumber) {
   for (size_t i = 0; i != _fixedNumber->strNumberLen; ++i) {
     _fixedNumber->tenNumber *= _fixedNumber->system;
     strDigit = _fixedNumber->strNumber[i];
-    _fixedNumber->tenNumber += isdigit(strDigit) ? strDigit - '0' : strDigit - 'A' + 10;
+    _fixedNumber->tenNumber += isdigit(strDigit) ? strDigit - '0' : toupper(strDigit) - 'A' + 10;
     if (_fixedNumber->tenNumber > INT_MAX) {
       return _errorIntOverflow();
     }
@@ -120,20 +119,11 @@ returnStatus converter(const char inputFileName[], const char outputFileName[]) 
   _initDataOfFixedNumber(&_fixedNumber);
 
   while ((_inputedSymbol.symbol = fgetc(inputFile)) != EOF) {
-    if (isdigit(_inputedSymbol.symbol)) {
-      if (_fixNumberData(&_inputedSymbol, &_fixedNumber, '0') != OK) {
+    if (isdigit(_inputedSymbol.symbol) || isalpha(_inputedSymbol.symbol)) {
+      if (_fixNumberData(&_inputedSymbol, &_fixedNumber) != OK) {
         return INVALID_DATA_IN_FILE;
       }
-    }
-
-    else if (isalpha(_inputedSymbol.symbol)) {
-      _inputedSymbol.symbol = toupper(_inputedSymbol.symbol);
-      if (_fixNumberData(&_inputedSymbol, &_fixedNumber, 'A') != OK) {
-        return INVALID_DATA_IN_FILE;
-      }
-    } 
-
-    else if (isspace(_inputedSymbol.symbol)) {
+    } else if (isspace(_inputedSymbol.symbol)) {
       if (_fixedNumber.strNumberLen > 0) {
         if (_convertNumberToTenSystem(&_fixedNumber) != OK) {
           return INVALID_DATA_IN_FILE;
@@ -141,9 +131,7 @@ returnStatus converter(const char inputFileName[], const char outputFileName[]) 
         _printNumberData(outputFile, &_fixedNumber);
         _initDataOfFixedNumber(&_fixedNumber);
       }
-    } 
-    
-    else {
+    } else {
       fclose(inputFile);
       fclose(outputFile);
       return _errorInvalidDataInFile();
