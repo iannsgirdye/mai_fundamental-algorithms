@@ -4,12 +4,15 @@
 
 typedef enum {
   OK,
-  INVALID_COUNT_OF_ARGUMENTS
+  HELP_USAGE,
+  INVALID_COUNT_OF_ARGUMENTS,
+  INVALID_ARGUMENT
 } returnStatus;
 
 
 void help();
 returnStatus validateCountOfArguments(int argc);
+returnStatus validateSecondArgument(char* argv[], double* epsilon);
 
 
 #endif
