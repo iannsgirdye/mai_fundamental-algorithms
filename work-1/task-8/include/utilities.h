@@ -9,7 +9,7 @@ typedef enum {
 } returnStatus;
 
 
-returnStatus getSystem(int *number);
+returnStatus getSystem(int *system);
 
 
 #endif

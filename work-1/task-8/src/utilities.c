@@ -5,13 +5,13 @@
 #include <ctype.h>
 
 
-returnStatus getSystem(int *number) {
+returnStatus getSystem(int *system) {
   char symbol;
   for (size_t i = 0; i <= 2; ++i) {
     symbol = getchar();
     if (isdigit(symbol) && i != 2) {
-      *number *= 10;
-      *number += symbol - '0';
+      *system *= 10;
+      *system += symbol - '0';
     } else if (symbol == '\n' && i != 0) {
       break;
     } else {
@@ -19,7 +19,7 @@ returnStatus getSystem(int *number) {
     }
   }
 
-  if (*number < 2 || *number > 36) {
+  if (*system < 2 || *system > 36) {
     return _errorInvalidSystem();
   }
 
