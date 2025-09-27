@@ -64,7 +64,8 @@ returnStatus _toNSystem(char convertedStrNumber[], int number, const int system)
   }
 
   char tmpDigit;
-  for (size_t j = 0; j != i / 2; ++j) {
+  
+  for (size_t j = (sign == 1) ? 0 : 1; j != i / 2; ++j) {
     tmpDigit = convertedStrNumber[j];
     convertedStrNumber[j] = convertedStrNumber[i - j - 1];
     convertedStrNumber[i - j - 1] = tmpDigit;
