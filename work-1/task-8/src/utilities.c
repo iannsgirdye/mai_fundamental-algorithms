@@ -1,17 +1,8 @@
 #include "../include/utilities.h"
-#include "../include/colors.h"
+#include "../include/errors.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-
-
-returnStatus _errorIncorrectSystem() {
-  printf(
-    COLOR_BOLD_RED "Ошибка: "
-    COLOR_WHITE "система счисления должна быть в диапозоне [2..36].\n"
-  );
-  return INVALID_VALUE;
-}
 
 
 returnStatus getSystem(int *number) {
@@ -24,12 +15,12 @@ returnStatus getSystem(int *number) {
     } else if (symbol == '\n' && i != 0) {
       break;
     } else {
-      return _errorIncorrectSystem();
+      return _errorInvalidSystem();
     }
   }
 
   if (*number < 2 || *number > 36) {
-    return _errorIncorrectSystem();
+    return _errorInvalidSystem();
   }
 
   return OK;
