@@ -29,11 +29,16 @@ void flag_q(int argc, char* argv[]) {
           if (i != k && j != k) {
             c = numbers[k];
             
-            D = b * b - 4 * a * c;
-            if (D >= 0) {
-              results[found_results] = (-b + sqrt(D)) / (2 * a);
-              found_results++;
-              results[found_results] = (-b - sqrt(D)) / (2 * a);
+            if (a != 0) {
+              D = b * b - 4 * a * c;
+              if (D >= 0) {
+                results[found_results] = (-b + sqrt(D)) / (2 * a);
+                found_results++;
+                results[found_results] = (-b - sqrt(D)) / (2 * a);
+                found_results++;
+              }
+            } else if (b != 0) {
+              results[found_results] = -c / b;
               found_results++;
             }
           }
