@@ -12,7 +12,7 @@ returnStatus getSystem(int *system) {
     if (isdigit(symbol) && i != 2) {
       *system *= 10;
       *system += symbol - '0';
-    } else if (symbol == '\n' && i != 0) {
+    } else if (isspace(symbol) && i != 0) {
       break;
     } else {
       return _errorInvalidSystem();
