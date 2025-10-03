@@ -1,5 +1,5 @@
 #ifndef COLORS_H
-#define COLOR_COLORS_H
+#define COLORS_H
 
 #define COLOR_WHITE      "\e[0;37m"
 #define COLOR_BOLD_RED   "\e[1;31m"
