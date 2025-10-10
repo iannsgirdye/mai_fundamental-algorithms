@@ -1,4 +1,5 @@
 #include "../include/ln2.h"
+#include "../include/utilities.h"
 #include <math.h>
 
 
@@ -13,7 +14,7 @@ double calculateLn2UsingLimit(const double epsilon) {
   double prevValue = _calculateLn2Function(n);
   double currentValue = _calculateLn2Function(++n);
 
-  while (fabs(currentValue - prevValue) >= epsilon) {
+  while (fabs(currentValue - prevValue) >= epsilon && n <= MAX_N) {
     prevValue = currentValue;
     currentValue = _calculateLn2Function(++n);
   }
