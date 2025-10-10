@@ -1,4 +1,5 @@
 #include "../include/exponent.h"
+#include "../include/utilities.h"
 #include <math.h>
 #include <stdlib.h>
 
@@ -14,7 +15,7 @@ double calculateExponentUsingLimit(const double epsilon) {
   double prevValue = _calculateExponentFunction(n);
   double currentValue = _calculateExponentFunction(++n);
 
-  while (fabs(currentValue - prevValue) >= epsilon) {
+  while (fabs(currentValue - prevValue) >= epsilon && n <= MAX_N) {
     prevValue = currentValue;
     currentValue = _calculateExponentFunction(++n);
   }
