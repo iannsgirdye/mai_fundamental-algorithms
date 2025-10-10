@@ -3,6 +3,9 @@
 #include <math.h>
 
 
+#define EXPONENT 2.71828
+
+
 double _calculateLn2Function(const int n) {
   return n * (pow(2, 1.0 / n) - 1);
 }
@@ -42,4 +45,30 @@ double calculateLn2UsingRow(const double epsilon) {
   }
 
   return result;
+}
+
+
+double _ln2Difference(const double x) {
+  return pow(EXPONENT, x) - 2;
+}
+
+
+double calculateLn2UsingEquation(const double epsilon) {
+  double leftValue = 0.5;
+  double rightValue = 0.9;
+  double middleValue = _middleValue(leftValue, rightValue);
+  double ln2Difference = _ln2Difference(middleValue);
+
+  for (int n = 0; fabs(ln2Difference) >= epsilon && n <= MAX_N; ++n) {
+    if (ln2Difference < 0) {
+      leftValue = middleValue;
+    } else {
+      rightValue = middleValue;
+    }
+
+    middleValue = _middleValue(leftValue, rightValue);
+    ln2Difference = _ln2Difference(middleValue);
+  }
+
+  return middleValue;
 }
