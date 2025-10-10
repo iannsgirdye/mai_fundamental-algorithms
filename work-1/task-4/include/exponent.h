@@ -4,6 +4,7 @@
 
 double calculateExponentUsingLimit(const double epsilon);
 double calculateExponentUsingRow(const double epsilon);
+double calculateExponentUsingEquation(const double epsilon);
 
 
 #endif
