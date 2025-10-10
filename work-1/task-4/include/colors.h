@@ -7,6 +7,7 @@
 #define COLOR_BOLD_RED    "\e[1;31m"
 #define COLOR_BOLD_GREEN  "\e[1;32m"
 #define COLOR_BOLD_YELLOW "\e[1;33m"
+#define COLOR_BOLD_BLUE   "\e[1;34m"
 
 
 #endif
