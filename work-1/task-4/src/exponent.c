@@ -31,15 +31,15 @@ double _calculateExponentSummand(const int n) {
 
 
 double calculateExponentUsingRow(const double epsilon) {
-  int n = 2;
+  int n = 1;
 
-  double currentValue = _calculateExponentSummand(n);
-  double nextValue = _calculateExponentSummand(++n);
+  double prevValue = _calculateExponentSummand(n);
+  double currentValue = _calculateExponentSummand(++n);
   double result = 2 + currentValue;  // summand = 1 for n = 0 and n = 1 
 
-  while (fabs(nextValue - currentValue) >= epsilon && n <= MAX_N_FOR_FACTORIAL) {
-    currentValue = nextValue;
-    nextValue = _calculateExponentSummand(++n);
+  while (fabs(currentValue - prevValue) >= epsilon && n <= MAX_N_FOR_FACTORIAL) {
+    prevValue = currentValue;
+    currentValue = _calculateExponentSummand(++n);
     result += currentValue;
   }
 
