@@ -47,11 +47,6 @@ double calculateExponentUsingRow(const double epsilon) {
 }
 
 
-double _calculateMiddleValueForEquation(const double leftValue, const double rightValue) {
-  return rightValue - (rightValue - leftValue) / 2;
-}
-
-
 double _calculateExponentDifference(const double x) {
   return log(x) - 1;
 }
@@ -60,7 +55,7 @@ double _calculateExponentDifference(const double x) {
 double calculateExponentUsingEquation(const double epsilon) {
   double leftValue = 2.5;
   double rightValue = 3.0;
-  double middleValue = _calculateMiddleValueForEquation(leftValue, rightValue);
+  double middleValue = _middleValue(leftValue, rightValue);
   double exponentDifference = _calculateExponentDifference(middleValue);
 
   for (int n = 0; fabs(exponentDifference) >= epsilon && n < MAX_N; ++n) {
@@ -70,7 +65,7 @@ double calculateExponentUsingEquation(const double epsilon) {
       rightValue = middleValue;
     }
     
-    middleValue = _calculateMiddleValueForEquation(leftValue, rightValue);
+    middleValue = _middleValue(leftValue, rightValue);
     exponentDifference = _calculateExponentDifference(middleValue);
   }
 

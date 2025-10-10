@@ -12,3 +12,7 @@ unsigned long long factorial(const int n) {
 }
 
 
+double _middleValue(const double leftValue, const double rightValue) {
+  return rightValue - (rightValue - leftValue) / 2;
+}
+
