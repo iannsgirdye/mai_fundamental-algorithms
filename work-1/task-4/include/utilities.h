@@ -9,6 +9,7 @@
 
 unsigned long long factorial(const int n);
 double _middleValue(const double leftValue, const double rightValue);
+double _combinations(const int k, const int m);
 
 
 #endif
