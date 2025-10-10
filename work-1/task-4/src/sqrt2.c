@@ -23,3 +23,25 @@ double calculateSqrt2UsingLimit(const double epsilon) {
 
   return currentValue;
 }
+
+
+double _calculateSqrt2Multiplier(const int k) {
+  return pow(2, pow(2, -k));
+}
+
+
+double calculateSqrt2UsingProduct(const double epsilon) {
+  int k = 2;
+
+  double currentValue = _calculateSqrt2Multiplier(k);
+  double nextValue = _calculateSqrt2Multiplier(++k);
+  double product = currentValue;
+
+  while (fabs(nextValue - currentValue) >= epsilon && k <= MAX_N) {
+    currentValue = nextValue;
+    nextValue = _calculateSqrt2Multiplier(++k);
+    product *= currentValue;
+  }
+
+  return product;
+}
