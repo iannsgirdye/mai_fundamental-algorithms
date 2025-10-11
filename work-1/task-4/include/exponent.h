@@ -2,7 +2,6 @@
 #define EXPONENT_H
 
 
-double calculateExponentUsingLimit(const double epsilon);
 double calculateExponentUsingRow(const double epsilon);
 double calculateExponentUsingEquation(const double epsilon);
 
