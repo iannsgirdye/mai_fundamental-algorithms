@@ -5,28 +5,6 @@
 #include <stdio.h>
 
 
-double _calculateExponentSummand(const int n) {
-  return 1.0 / factorial(n);
-}
-
-
-double calculateExponentUsingRow(const double epsilon) {
-  int n = 1;
-
-  double prevValue = _calculateExponentSummand(n);
-  double currentValue = _calculateExponentSummand(++n);
-  double result = 2 + currentValue;  // summand = 1 for n = 0 and n = 1 
-
-  while (fabs(currentValue - prevValue) >= epsilon && n <= MAX_N_FOR_FACTORIAL) {
-    prevValue = currentValue;
-    currentValue = _calculateExponentSummand(++n);
-    result += currentValue;
-  }
-
-  return result;
-}
-
-
 double _calculateExponentDifference(const double x) {
   return log(x) - 1;
 }

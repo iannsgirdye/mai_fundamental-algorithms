@@ -3,28 +3,6 @@
 #include <math.h>
 
 
-double _calculateLn2Summand(const int n) {
-  return pow(-1, n - 1) / (double)n;
-}
-
-
-double calculateLn2UsingRow(const double epsilon) {
-  int n = 1;
-
-  double currentValue = _calculateLn2Summand(n);
-  double nextValue = _calculateLn2Summand(++n);
-  double result = currentValue;
-
-  while (fabs(nextValue - currentValue) >= epsilon && n <= MAX_N) {
-    currentValue = nextValue;
-    nextValue = _calculateLn2Summand(++n);
-    result += currentValue;
-  }
-
-  return result;
-}
-
-
 double _ln2Difference(const double x, const double exponent) {
   return pow(exponent, x) - 2;
 }
