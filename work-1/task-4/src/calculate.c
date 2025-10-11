@@ -7,8 +7,6 @@
 
 
 #define X0 -0.5
-#define STRINGS_ARE_EQUAL 0
-
 #define EXPONENT_START_RESULT 2
 #define DEFAULT_START_RESULT 0
 
@@ -88,13 +86,13 @@ double product(const char *type, double (*function)(const int), const double eps
 
 
 void _initBorderValues(const char *type, double *leftValue, double *rightValue) {
-  if (strcmp(type, "exponent") == STRINGS_ARE_EQUAL) {
+  if (_typeIsExponent(type)) {
     *leftValue = 2.5;
     *rightValue = 3.0;
-  } else if (strcmp(type, "ln2") == STRINGS_ARE_EQUAL) {
+  } else if (_typeIsLn2(type)) {
     *leftValue = 0.5;
     *rightValue = 1.0;
-  } else if (strcmp(type, "sqrt2") == STRINGS_ARE_EQUAL) {
+  } else if (_typeIsSqrt2(type)) {
     *leftValue = 1.2;
     *rightValue = 1.7;
   }
