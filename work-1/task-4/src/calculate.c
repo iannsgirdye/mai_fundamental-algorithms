@@ -9,6 +9,9 @@
 #define X0 -0.5
 #define STRINGS_ARE_EQUAL 0
 
+#define EXPONENT_START_RESULT 2
+#define DEFAULT_START_RESULT 0
+
 
 double limit(double (*function)(const int), const double epsilon) { 
   int n = 1;
@@ -38,21 +41,20 @@ double sqrt2Limit(double (*function)(const double), const double epsilon) {
 }
 
 
-bool _isExponent(const int startN) {
-  return startN == 0;
+int _defineStarnN(const char *type) {
+  if (_typeIsPi(type) || _typeIsLn2(type)) {
+    return 1;
+  } 
+  
+  return 2;
 }
 
 
-double row(double (*function)(const int), const int startN, const double epsilon) {
-  int n = startN;
-  double result = 0;
-
+double row(const char *type, double (*function)(const int), const double epsilon) {
+  int n = _defineStarnN(type);
   /* function(0) = 1 and function(1) = 1 => 1 - 1 < epsilon
      This is the reason why we start from n = 2 and result += 2 */
-  if (_isExponent(startN)) {
-    n += 2;
-    result += 2;
-  }
+  double result = _typeIsExponent(type) ? EXPONENT_START_RESULT : DEFAULT_START_RESULT;
 
   double currentValue = function(n);
   double nextValue = function(++n);
@@ -68,8 +70,8 @@ double row(double (*function)(const int), const int startN, const double epsilon
 }
 
 
-double product(double (*function)(const int), const int starnN, const double epsilon) {
-  int k = starnN;
+double product(const char *type, double (*function)(const int), const double epsilon) {
+  int k = _defineStarnN(type);
 
   double currentValue = function(k);
   double nextValue = function(++k);
