@@ -81,3 +81,52 @@ double product(double (*function)(const int), const int starnN, const double eps
 
   return product;
 }
+
+
+double equation(
+  double (*function)(const double),
+  double leftValue,
+  double rightValue,
+  const double epsilon
+) {
+  double middleValue = _middleValue(leftValue, rightValue);
+  double exponentDifference = function(middleValue);
+
+  for (int n = 0; fabs(exponentDifference) >= epsilon && n < MAX_N; ++n) {
+    if (exponentDifference < 0) {
+      leftValue = middleValue;
+    } else {
+      rightValue = middleValue;
+    }
+    
+    middleValue = _middleValue(leftValue, rightValue);
+    exponentDifference = function(middleValue);
+  }
+
+  return middleValue;
+}
+
+
+double equationLn2(
+  double (*function)(const double, const double),
+  const double exponent,
+  double leftValue,
+  double rightValue,
+  const double epsilon
+) {
+  double middleValue = _middleValue(leftValue, rightValue);
+  double exponentDifference = function(middleValue, exponent);
+
+  for (int n = 0; fabs(exponentDifference) >= epsilon && n < MAX_N; ++n) {
+    if (exponentDifference < 0) {
+      leftValue = middleValue;
+    } else {
+      rightValue = middleValue;
+    }
+    
+    middleValue = _middleValue(leftValue, rightValue);
+    exponentDifference = function(middleValue, exponent);
+  }
+
+  return middleValue;
+}
