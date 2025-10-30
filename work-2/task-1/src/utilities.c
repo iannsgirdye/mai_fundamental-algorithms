@@ -16,7 +16,7 @@ returnStatus checkArray(const size_t size, const void *array) {
 
 returnStatus getFractions(const size_t size, double fractions[]) {
   if (checkArray(size, fractions) != OK) {
-    return _errorInvalidArray();
+    return _errorInvalidArray("getFraction");
   }
 
   for (size_t i = 0; i != size; ++i) {
@@ -29,7 +29,7 @@ returnStatus getFractions(const size_t size, double fractions[]) {
 
 returnStatus printResults(const size_t size, const bool results[]) {
   if (checkArray(size, results) != OK) {
-    return _errorInvalidArray();
+    return _errorInvalidArray("printResults");
   }
 
   for (size_t i = 0; i != size; ++i) {
