@@ -15,6 +15,6 @@ returnStatus _errorInvalidSystem(const int system) {
 
 
 returnStatus _errorInvalidValue(const double value) {
-  printf(COLOR_BOLD_RED "Error: " COLOR_WHITE "%lf is invalid value for decimal.\n");
+  printf(COLOR_BOLD_RED "Error: " COLOR_WHITE "%lf is invalid value for decimal.\n", value);
   return INVALID_VALUE;
 }
