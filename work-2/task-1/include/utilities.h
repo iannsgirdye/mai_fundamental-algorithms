@@ -8,6 +8,7 @@
 
 
 returnStatus getFractions(const size_t size, double fractions[]);
+returnStatus printResults(const size_t size, const bool results[]);
 
 
 #endif

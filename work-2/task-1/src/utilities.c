@@ -25,3 +25,17 @@ returnStatus getFractions(const size_t size, double fractions[]) {
 
   return OK;
 }
+
+
+returnStatus printResults(const size_t size, const bool results[]) {
+  if (_checkArray(size, results) != OK) {
+    return _errorInvalidArray();
+  }
+
+  for (size_t i = 0; i != size; ++i) {
+    printf("%s", results[i] ? "true" : "false");
+    printf("%s", (i != size - 1) ? " " : "\n");
+  }
+
+  return OK;
+}
