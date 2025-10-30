@@ -19,8 +19,13 @@ returnStatus getFractions(const size_t size, double fractions[]) {
     return _errorInvalidArray("getFraction");
   }
 
+  double decimal;
   for (size_t i = 0; i != size; ++i) {
-    scanf("%lf", &fractions[i]);
+    scanf("%lf", &decimal);
+    if (decimal < 0 || decimal > 1) {
+      return _errorInvalidValue(decimal);
+    }
+    fractions[i] = decimal;
   }
 
   return OK;
