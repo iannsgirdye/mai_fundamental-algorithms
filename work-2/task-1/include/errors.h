@@ -6,9 +6,9 @@
 #include "./returnStatus.h"
 
 
-returnStatus _errorInvalidSystem();
-returnStatus _errorInvalidArray();
-returnStatus _errorInvalidValue();
+returnStatus _errorInvalidArray(const char *functionName);
+returnStatus _errorInvalidSystem(const int system);
+returnStatus _errorInvalidValue(const double value);
 
 
 #endif

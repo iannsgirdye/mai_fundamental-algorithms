@@ -2,19 +2,19 @@
 #include "../include/colors.h"
 
 
-returnStatus _errorInvalidArray() {
-  printf(COLOR_BOLD_RED "Error: " COLOR_WHITE "invalid array.\n");
+returnStatus _errorInvalidArray(const char *functionName) {
+  printf(COLOR_BOLD_RED "Error: " COLOR_WHITE "invalid array as argument in %s.\n", functionName);
   return INVALID_ARRAY;
 }
 
 
-returnStatus _errorInvalidSystem() {
-  printf(COLOR_BOLD_RED "Error: " COLOR_WHITE "invalid system.\n");
+returnStatus _errorInvalidSystem(const int system) {
+  printf(COLOR_BOLD_RED "Error: " COLOR_WHITE "%d is invalid system.\n", system);
   return INVALID_SYSTEM;
 }
 
 
-returnStatus _errorInvalidValue() {
-  printf(COLOR_BOLD_RED "Error: " COLOR_WHITE "invalid value of fraction.\n");
+returnStatus _errorInvalidValue(const double value) {
+  printf(COLOR_BOLD_RED "Error: " COLOR_WHITE "%lf is invalid value for decimal.\n");
   return INVALID_VALUE;
 }
