@@ -2,12 +2,6 @@
 #include "../include/colors.h"
 
 
-returnStatus _errorNoArguments() {
-  printf(COLOR_BOLD_RED "Error: " COLOR_WHITE "size = 0 for function with undefined count of arguments.\n");
-  return NO_ARGUMENTS;
-}
-
-
 returnStatus _errorInvalidArray() {
   printf(COLOR_BOLD_RED "Error: " COLOR_WHITE "invalid array.\n");
   return INVALID_ARRAY;

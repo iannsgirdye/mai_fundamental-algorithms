@@ -6,7 +6,6 @@
 #include "./returnStatus.h"
 
 
-returnStatus _errorNoArguments();
 returnStatus _errorInvalidSystem();
 returnStatus _errorInvalidArray();
 returnStatus _errorInvalidValue();
