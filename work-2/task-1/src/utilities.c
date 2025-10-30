@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 
-returnStatus _checkArray(const size_t size, const void *array) {
+returnStatus checkArray(const size_t size, const void *array) {
   if (size == 0) {
     return INVALID_ARRAY;
   }
@@ -15,7 +15,7 @@ returnStatus _checkArray(const size_t size, const void *array) {
 
 
 returnStatus getFractions(const size_t size, double fractions[]) {
-  if (_checkArray(size, fractions) != OK) {
+  if (checkArray(size, fractions) != OK) {
     return _errorInvalidArray();
   }
 
@@ -28,7 +28,7 @@ returnStatus getFractions(const size_t size, double fractions[]) {
 
 
 returnStatus printResults(const size_t size, const bool results[]) {
-  if (_checkArray(size, results) != OK) {
+  if (checkArray(size, results) != OK) {
     return _errorInvalidArray();
   }
 
