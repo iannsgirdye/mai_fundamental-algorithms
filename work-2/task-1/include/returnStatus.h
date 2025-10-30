@@ -3,10 +3,10 @@
 
 
 typedef enum {
-  OK = 0,
-  INVALID_SYSTEM = 1,
-  INVALID_ARRAY = 2,
-  INVALID_VALUE = 3
+  INVALID_SYSTEM = -3,
+  INVALID_ARRAY = -2,
+  INVALID_VALUE = -1,
+  OK = 0
 } returnStatus;
 
 
