@@ -151,3 +151,18 @@ char *strpbrk(const char *str1, const char *str2) {
   }
   return NULL;
 }
+
+
+char *strrchr(const char *str, int c) {
+  char *lastC = NULL;
+  const size_t strLen = strlen(str);
+  const char _c = (char)c;
+
+  for (size_t i = 0; i != strLen; ++i) {
+    if (str[i] == _c) {
+      lastC = (char *)(str + i);
+    }
+  }
+
+  return lastC;
+}
