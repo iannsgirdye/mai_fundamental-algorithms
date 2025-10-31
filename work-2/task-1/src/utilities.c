@@ -7,7 +7,7 @@
 
 #define BUFFER_SIZE 20
 #define DECIMAL_SYSTEM 10
-#define MIN_SYSTEM 1
+#define MIN_SYSTEM 2
 #define MIN_FRACTION 0
 #define MAX_FRACTION 1
 
