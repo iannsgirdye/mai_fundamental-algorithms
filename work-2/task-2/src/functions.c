@@ -84,6 +84,19 @@ char *strchr(const char *str, int c) {
 }
 
 
+int strncmp(const char *str1, const char *str2, size_t n) {
+  for (size_t i = 0; i != n; ++i) {
+    if (str1[i] < str2[i]) {
+      return FIRST_LESS_SECOND;
+    }
+    if (str1[i] > str2[i]) {
+      return FIRST_GREATER_SECOND;
+    }
+  }
+  return FIRST_EQUAL_SECOND;
+}
+
+
 size_t strlen(const char *str) {
   size_t i = 0;
   while (str[i] != '\0') {
