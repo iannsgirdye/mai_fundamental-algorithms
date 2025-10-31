@@ -22,6 +22,6 @@ returnStatus _errorInvalidSystem(const long int system) {
 
 
 returnStatus _errorInvalidDecimal(const double decimal) {
-  printf(COLOR_BOLD_RED "Error: " COLOR_WHITE "%lf is invalid value for decimal.\n", decimal);
+  printf(COLOR_BOLD_RED "Error: " COLOR_WHITE "decimal fraction \"%lf\" is not in range [0; 1].\n", decimal);
   return INVALID_DECIMAL;
 }
