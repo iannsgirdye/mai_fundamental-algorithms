@@ -4,7 +4,7 @@
 
 
 returnStatus _errorInvalidArray(const char *functionName) {
-  printf(COLOR_BOLD_RED "Error: " COLOR_WHITE "invalid array as argument in %s.\n", functionName);
+  printf(COLOR_BOLD_RED "Error: " COLOR_WHITE "invalid array as argument in function \"%s\".\n", functionName);
   return INVALID_ARRAY;
 }
 
