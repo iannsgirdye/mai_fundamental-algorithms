@@ -59,6 +59,18 @@ void *memset(void *str, int c, size_t n) {
 }
 
 
+char *strncat(char *dest, const char *src, size_t n) {
+  const size_t destLen = strlen(dest);
+  
+  for (size_t i = 0; i != n; ++i) {
+    dest[destLen + i] = src[i];
+  }
+  dest[destLen + n] = '\0';
+  
+  return dest;
+}
+
+
 size_t strlen(const char *str) {
   size_t i = 0;
   while (str[i] != '\0') {
