@@ -1,12 +1,14 @@
 #include "../include/functions.h"
 #include "../include/errno.h"
 #include <stdbool.h>
+#include <stdio.h>
 
 
 #define FIRST_LESS_SECOND -1
 #define FIRST_EQUAL_SECOND 0
 #define FIRST_GREATER_SECOND 1
 #define NO_NEEDLE_START -1
+#define STRTOK_START_FROM_NULL true
 
 
 void *memchr(const void *str, int c, size_t n) {
@@ -213,4 +215,40 @@ char *strstr(const char *haystack, const char *needle) {
     return NULL;
   }
   return (char *)(haystack + iNeedleStart);
+}
+
+
+bool _initStrtokValues(char *str, char **iter, char **start) {
+  if (str == NULL) {
+    if (*iter == NULL) {
+      return STRTOK_START_FROM_NULL;
+    } 
+    ++(*iter);
+    *start = *iter;
+  } else {
+    *iter = str;
+    *start = str;
+  }
+
+  return !STRTOK_START_FROM_NULL;
+}
+
+
+char *strtok(char *str, const char *delim) {
+  static char *iter = NULL;
+  static char *start = NULL;
+
+  if (_initStrtokValues(str, &iter, &start) == STRTOK_START_FROM_NULL) {
+    return NULL;
+  }
+  
+  while (*iter != '\0') {
+    if (strchr(delim, *iter) != NULL) {
+      *iter = '\0';
+      return start;
+    }
+    ++iter;
+  }
+  
+  return start;
 }
