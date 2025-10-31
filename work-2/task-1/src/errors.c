@@ -9,6 +9,12 @@ returnStatus _errorInvalidArray(const char *functionName) {
 }
 
 
+returnStatus _errorSystemIsNotDecimalNumber(const char *text) {
+  printf(COLOR_BOLD_RED "Error: " COLOR_WHITE "\"%s\" is not a decimal number.\n", text);
+  return SYSTEM_IS_NOT_DECIMAL_NUMBER;
+}
+
+
 returnStatus _errorInvalidSystem() {
   printf(COLOR_BOLD_RED "Error: " COLOR_WHITE "system is not in range [0; %d].\n", INT_MAX);
   return INVALID_SYSTEM;
