@@ -21,6 +21,12 @@ returnStatus _errorInvalidSystem(const long int system) {
 }
 
 
+returnStatus _errorDecimalIsNotDecimalFraction(const char *text) {
+  printf(COLOR_BOLD_RED "Error: " COLOR_WHITE "\"%s\" is not a decimal fraction.\n", text);
+  return DECIMAL_IS_NOT_DECIMAL_FRACTION;
+}
+
+
 returnStatus _errorInvalidDecimal(const double decimal) {
   printf(COLOR_BOLD_RED "Error: " COLOR_WHITE "decimal fraction \"%lf\" is not in range [0; 1].\n", decimal);
   return INVALID_DECIMAL;
