@@ -49,7 +49,7 @@ returnStatus getFractions(const size_t size, double fractions[]) {
   for (size_t i = 0; i != size; ++i) {
     scanf("%lf", &decimal);
     if (decimal < 0 || decimal > 1) {
-      return _errorInvalidValue(decimal);
+      return _errorInvalidDecimal(decimal);
     }
     fractions[i] = decimal;
   }
