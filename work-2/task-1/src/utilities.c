@@ -8,8 +8,8 @@
 #define BUFFER_SIZE 20
 #define DECIMAL_SYSTEM 10
 #define MIN_SYSTEM 2
-#define MIN_FRACTION 0
-#define MAX_FRACTION 1
+#define MIN_FRACTION 0.0
+#define MAX_FRACTION 1.0
 
 
 returnStatus checkArray(const size_t size, const void *array) {
@@ -53,7 +53,7 @@ returnStatus _getFraction(double *fraction) {
   if (*endPtr != '\0') {
     return _errorDecimalIsNotDecimalFraction(strFraction);
   }
-  if (doubleFraction < MIN_FRACTION || doubleFraction > MAX_FRACTION) {
+  if (doubleFraction <= MIN_FRACTION || doubleFraction >= MAX_FRACTION) {
     return _errorInvalidDecimal(doubleFraction);
   }
   

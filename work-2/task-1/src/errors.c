@@ -28,6 +28,6 @@ returnStatus _errorDecimalIsNotDecimalFraction(const char *text) {
 
 
 returnStatus _errorInvalidDecimal(const double decimal) {
-  printf(COLOR_BOLD_RED "Error: " COLOR_WHITE "decimal fraction \"%lf\" is not in range [0; 1].\n", decimal);
+  printf(COLOR_BOLD_RED "Error: " COLOR_WHITE "decimal fraction \"%lf\" is not in range (0; 1).\n", decimal);
   return INVALID_DECIMAL;
 }
