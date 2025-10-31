@@ -136,3 +136,18 @@ size_t strlen(const char *str) {
   }
   return i;
 }
+
+
+char *strpbrk(const char *str1, const char *str2) {
+  const size_t str1Len = strlen(str1);
+  const size_t str2Len = strlen(str2);
+
+  for (size_t i = 0; i != str1Len; ++i) {
+    for (size_t j = 0; j != str2Len; ++j) {
+      if (str1[i] == str2[j]) {
+        return (char *)(str1 + i);
+      }
+    }
+  }
+  return NULL;
+}
