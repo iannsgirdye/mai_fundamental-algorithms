@@ -29,7 +29,7 @@ returnStatus getSystem(int *system) {
   if (*endPtr != '\0') {
     return _errorSystemIsNotDecimalNumber(strSystem);
   }
-  if (intSystem < 0 || intSystem > INT_MAX) {
+  if (intSystem < 1 || intSystem > INT_MAX) {
     return _errorInvalidSystem(intSystem);
   }
 
