@@ -17,7 +17,7 @@ int memcmp(const void *str1, const void *str2, size_t n)
 void *memcpy(void *dest, const void *src, size_t n)
 ```
 
-Скопировать символа `c` (беззнаковый тип) в первые `n` символов строки, на которую указывает аргумент `str`
+Скопировать символ `c` (беззнаковый тип) в первые `n` символов строки, на которую указывает аргумент `str`
 ```c
 void *memset(void *str, int c, size_t n)
 ```
