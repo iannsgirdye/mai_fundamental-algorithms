@@ -32,3 +32,15 @@ int memcmp(const void *str1, const void *str2, size_t n) {
   }
   return FIRST_EQUAL_SECOND;
 }
+
+
+void *memcpy(void *dest, const void *src, size_t n) {
+  unsigned char *_dest = (unsigned char *)dest;
+  const unsigned char *_src = (unsigned char *)src;
+
+  for (size_t i = 0; i != n; ++i) {
+    _dest[i] = _src[i];
+  }
+  
+  return (void *)_dest;
+}
