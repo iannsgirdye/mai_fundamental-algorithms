@@ -24,7 +24,7 @@ returnStatus checkArray(const size_t size, const void *array) {
 
 
 returnStatus getSystem(int *system) {
-  char *strSystem = (char *)malloc(BUFFER_SIZE);
+  char strSystem[BUFFER_SIZE];
   scanf("%s", strSystem);
 
   char *endPtr;
@@ -38,14 +38,13 @@ returnStatus getSystem(int *system) {
   }
 
   *system = intSystem;
-  free(strSystem);
   
   return OK;
 }
 
 
 returnStatus _getFraction(double *fraction) {
-  char *strFraction = (char *)malloc(BUFFER_SIZE);
+  char strFraction[BUFFER_SIZE];
   scanf("%s", strFraction);
 
   char *endPtr;
@@ -59,7 +58,6 @@ returnStatus _getFraction(double *fraction) {
   }
   
   *fraction = doubleFraction;
-  free(strFraction);
   
   return OK;
 }
