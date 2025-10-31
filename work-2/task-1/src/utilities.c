@@ -40,6 +40,27 @@ returnStatus getSystem(int *system) {
 }
 
 
+returnStatus _getFraction(double *fraction) {
+  char *strFraction = (char *)malloc(20);
+  scanf("%s", strFraction);
+
+  char *endPtr;
+  double doubleFraction = strtod(strFraction, &endPtr);
+
+  if (*endPtr != '\0') {
+    return _errorDecimalIsNotDecimalFraction(strFraction);
+  }
+  if (doubleFraction < 0 || doubleFraction > 1) {
+    return _errorInvalidDecimal(doubleFraction);
+  }
+  
+  *fraction = doubleFraction;
+  free(strFraction);
+  
+  return OK;
+}
+
+
 returnStatus getFractions(const size_t size, double fractions[]) {
   if (checkArray(size, fractions) != OK) {
     return _errorInvalidArray("getFraction");
@@ -47,9 +68,8 @@ returnStatus getFractions(const size_t size, double fractions[]) {
 
   double decimal;
   for (size_t i = 0; i != size; ++i) {
-    scanf("%lf", &decimal);
-    if (decimal < 0 || decimal > 1) {
-      return _errorInvalidDecimal(decimal);
+    if (_getFraction(&decimal) != OK) {
+      return !OK;
     }
     fractions[i] = decimal;
   }
