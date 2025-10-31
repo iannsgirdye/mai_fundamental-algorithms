@@ -1,4 +1,5 @@
 #include "../include/functions.h"
+#include "../include/errno.h"
 
 
 #define FIRST_LESS_SECOND -1
@@ -117,6 +118,14 @@ size_t strcspn(const char *str1, const char *str2) {
     }
   }
   return str1Len;
+}
+
+
+char *strerror(int errnum) {
+  if (errnum < 0 || errnum > MAX_ERRNO) {
+    return "Unknown error";
+  }
+  return (char *)errors[errnum];
 }
 
 
