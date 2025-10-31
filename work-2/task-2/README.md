@@ -47,7 +47,7 @@ char *strncpy(char *dest, const char *src, size_t n)
 size_t strcspn(const char *str1, const char *str2)
 ```
 
-Найти во внутреннем массиве номера ошибки `errnum` и возвращает указатель на строку с сообщением об ошибке
+Найти во внутреннем массиве номер ошибки `errnum` и вернуть указатель на строку с сообщением об ошибке
 ```c
 char *strerror(int errnum)
 ```
