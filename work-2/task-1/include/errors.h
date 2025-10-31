@@ -7,7 +7,7 @@
 
 
 returnStatus _errorInvalidArray(const char *functionName);
-returnStatus _errorInvalidSystem(const int system);
+returnStatus _errorInvalidSystem();
 returnStatus _errorInvalidValue(const double value);
 
 
