@@ -1,6 +1,11 @@
 #include "../include/utilities.h"
 #include "../include/errors.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+
+#define BUFFER_SIZE 20
 
 
 returnStatus checkArray(const size_t size, const void *array) {
@@ -10,6 +15,27 @@ returnStatus checkArray(const size_t size, const void *array) {
   if (array == NULL) {
     return INVALID_ARRAY;
   }
+  return OK;
+}
+
+
+returnStatus getSystem(int *system) {
+  char *strSystem = (char *)malloc(20);
+  scanf("%s", strSystem);
+
+  char *endPtr;
+  long int intSystem = strtol(strSystem, &endPtr, 10);
+  
+  if (*endPtr != '\0') {
+    return _errorSystemIsNotDecimalNumber(strSystem);
+  }
+  if (intSystem < 0 || intSystem > INT_MAX) {
+    return _errorInvalidSystem(intSystem);
+  }
+
+  *system = intSystem;
+  free(strSystem);
+  
   return OK;
 }
 
