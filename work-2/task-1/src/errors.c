@@ -15,8 +15,8 @@ returnStatus _errorSystemIsNotDecimalNumber(const char *text) {
 }
 
 
-returnStatus _errorInvalidSystem() {
-  printf(COLOR_BOLD_RED "Error: " COLOR_WHITE "system is not in range [0; %d].\n", INT_MAX);
+returnStatus _errorInvalidSystem(const long int system) {
+  printf(COLOR_BOLD_RED "Error: " COLOR_WHITE "%ld is not in range [0; %d].\n", system, INT_MAX);
   return INVALID_SYSTEM;
 }
 
