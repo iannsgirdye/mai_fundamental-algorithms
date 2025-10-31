@@ -1,10 +1,12 @@
 #include "../include/functions.h"
 #include "../include/errno.h"
+#include <stdbool.h>
 
 
 #define FIRST_LESS_SECOND -1
 #define FIRST_EQUAL_SECOND 0
 #define FIRST_GREATER_SECOND 1
+#define NO_NEEDLE_START -1
 
 
 void *memchr(const void *str, int c, size_t n) {
@@ -165,4 +167,50 @@ char *strrchr(const char *str, int c) {
   }
 
   return lastC;
+}
+
+
+bool _isNotFoundNeedleStart(const int iNeedleStart) {
+  return iNeedleStart == NO_NEEDLE_START;
+}
+
+
+bool _isFindNeedleEnd(const char needleLetter) {
+  return needleLetter == '\0';
+}
+
+
+bool _isNotFoundNeedleFully(const size_t haystackLen, const size_t needleLen, const int iNeedleStart) {
+  return haystackLen < iNeedleStart + needleLen;
+}
+
+
+char *strstr(const char *haystack, const char *needle) {
+  const size_t haystackLen = strlen(haystack);
+  const size_t needleLen = strlen(needle);
+  int iNeedleStart = NO_NEEDLE_START;
+
+  if (needleLen == 0) {
+    return (char *)haystack;
+  }
+
+  for (size_t i = 0; i != haystackLen; ++i) {
+    if (_isNotFoundNeedleStart(iNeedleStart)) {
+      if (haystack[i] == needle[0]) {
+        iNeedleStart = i;
+      }
+    } else if (_isFindNeedleEnd(needle[i - iNeedleStart])) {
+      break;
+    } else if (haystack[i] != needle[i - iNeedleStart]) {
+      iNeedleStart = NO_NEEDLE_START;
+    }
+  }
+
+  if (_isNotFoundNeedleStart(iNeedleStart)) {
+    return NULL;
+  }
+  if (_isNotFoundNeedleFully(haystackLen, needleLen, iNeedleStart)) {
+    return NULL;
+  }
+  return (char *)(haystack + iNeedleStart);
 }
