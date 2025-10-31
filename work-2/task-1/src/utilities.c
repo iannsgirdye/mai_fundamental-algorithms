@@ -6,6 +6,10 @@
 
 
 #define BUFFER_SIZE 20
+#define DECIMAL_SYSTEM 10
+#define MIN_SYSTEM 1
+#define MIN_FRACTION 0
+#define MAX_FRACTION 1
 
 
 returnStatus checkArray(const size_t size, const void *array) {
@@ -20,16 +24,16 @@ returnStatus checkArray(const size_t size, const void *array) {
 
 
 returnStatus getSystem(int *system) {
-  char *strSystem = (char *)malloc(20);
+  char *strSystem = (char *)malloc(BUFFER_SIZE);
   scanf("%s", strSystem);
 
   char *endPtr;
-  long int intSystem = strtol(strSystem, &endPtr, 10);
+  long int intSystem = strtol(strSystem, &endPtr, DECIMAL_SYSTEM);
   
   if (*endPtr != '\0') {
     return _errorSystemIsNotDecimalNumber(strSystem);
   }
-  if (intSystem < 1 || intSystem > INT_MAX) {
+  if (intSystem < MIN_SYSTEM || intSystem > INT_MAX) {
     return _errorInvalidSystem(intSystem);
   }
 
@@ -41,7 +45,7 @@ returnStatus getSystem(int *system) {
 
 
 returnStatus _getFraction(double *fraction) {
-  char *strFraction = (char *)malloc(20);
+  char *strFraction = (char *)malloc(BUFFER_SIZE);
   scanf("%s", strFraction);
 
   char *endPtr;
@@ -50,7 +54,7 @@ returnStatus _getFraction(double *fraction) {
   if (*endPtr != '\0') {
     return _errorDecimalIsNotDecimalFraction(strFraction);
   }
-  if (doubleFraction < 0 || doubleFraction > 1) {
+  if (doubleFraction < MIN_FRACTION || doubleFraction > MAX_FRACTION) {
     return _errorInvalidDecimal(doubleFraction);
   }
   
