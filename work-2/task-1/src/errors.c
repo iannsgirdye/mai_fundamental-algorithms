@@ -1,5 +1,6 @@
 #include "../include/errors.h"
 #include "../include/colors.h"
+#include <limits.h>
 
 
 returnStatus _errorInvalidArray(const char *functionName) {
@@ -8,8 +9,8 @@ returnStatus _errorInvalidArray(const char *functionName) {
 }
 
 
-returnStatus _errorInvalidSystem(const int system) {
-  printf(COLOR_BOLD_RED "Error: " COLOR_WHITE "%d is invalid system.\n", system);
+returnStatus _errorInvalidSystem() {
+  printf(COLOR_BOLD_RED "Error: " COLOR_WHITE "system is not in range [0; %d].\n", INT_MAX);
   return INVALID_SYSTEM;
 }
 
