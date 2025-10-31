@@ -176,7 +176,6 @@
     [ENOANO] = "No anode",
     [EBADRQC] = "Invalid request code",
     [EBADSLT] = "Invalid slot",
-    [EDEADLOCK] = "File locking deadlock error",
     [EBFONT] = "Bad font file format",
     [ENOSTR] = "Device not a stream",
     [ENODATA] = "No data available",
