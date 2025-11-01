@@ -50,5 +50,5 @@
 
 ``` c
 int fprintf(FILE *__restrict__ _File, const char *__restrict__ _Format, ...);
-int sprintf(char *__restrict__ _Dest, const char *__restrict__ _Format, ...)
+int sprintf(char *__restrict__ _Dest, const char *__restrict__ _Format, ...);
 ```
