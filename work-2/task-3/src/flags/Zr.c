@@ -26,7 +26,6 @@ size_t fibonacci(int fibonacciValues[], int maxNumber) {
 }
 
 
-// 0-й элемент последовательности Фибоначчи не учитывается
 void flagZr(int number, char *zeckendorf) {
   int fibonacciValues[FIBONACCI_CAPACITY];
   size_t FibonacciValuesCount = fibonacci(fibonacciValues, number);
@@ -40,5 +39,6 @@ void flagZr(int number, char *zeckendorf) {
     } else {
       zeckendorf[i - 1] = '0';
     }
-  }  
+  }
+  // 0-й элемент последовательности Фибоначчи не учитывается
 }
