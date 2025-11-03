@@ -36,7 +36,7 @@ returnStatus fibonacci(unsigned int fibonacciValues[], unsigned int maxNumber, s
 returnStatus flagZr(unsigned int number, char *zeckendorf) {
   unsigned int fibonacciValues[FIBONACCI_CAPACITY];
   size_t FibonacciValuesCount;
-  if (fibonacci(fibonacciValues, number, FibonacciValuesCount) != OK) {
+  if (fibonacci(fibonacciValues, number, &FibonacciValuesCount) != OK) {
     return INVALID_ZECKENDORF_NUMBER;
   }
 
