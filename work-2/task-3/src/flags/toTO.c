@@ -29,9 +29,9 @@ int _isGoodDigit(const char digit, const int isCapitalize) {
 }
 
 
-returnStatus flagsToTO(const char number[], const int system, int *result, const int isCapitalize) {
+returnStatus flagsToTO(const char number[], int system, int *result, const int isCapitalize) {
   if (system < MIN_SYSTEM || system > MAX_SYSTEM) {
-    return INVALID_SYSTEM;
+    system = 10;
   }
 
   for (size_t i = 0; number[i] != '\0'; ++i) {

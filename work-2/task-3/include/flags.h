@@ -36,7 +36,7 @@ returnStatus flagsCvCV(int number, const int system, char *result, const int isC
 в диапазоне `[2..36]` (при основании системы счисления, не входящем в диапазон,
 значение основания системы счисления устанавливается равным `10`));
 */
-returnStatus flagsToTO(const char number[], const int system, int *result, const int isCapitalize);
+returnStatus flagsToTO(const char number[], int system, int *result, const int isCapitalize);
 
 
 #endif
