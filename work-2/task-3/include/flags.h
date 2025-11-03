@@ -25,7 +25,7 @@ returnStatus flagZr(unsigned int number, char *zeckendorf);
 в диапазоне `[2..36]` (при основании системы счисления, не входящем в диапазон,
 значение основания системы счисления устанавливается равным `10`))
 */
-returnStatus flagsCvCV(int number, const int system, char *result, const int isCapitalize);
+returnStatus flagsCvCV(int number, int system, char *result, const int isCapitalize);
 
 
 /*

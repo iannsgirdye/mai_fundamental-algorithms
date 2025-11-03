@@ -24,9 +24,9 @@ char _digit(const char digit, const int isCapitalize) {
 }
 
 
-returnStatus flagsCvCV(int number, const int system, char *result, const int isCapitalize) {
+returnStatus flagsCvCV(int number, int system, char *result, const int isCapitalize) {
   if (system < MIN_SYSTEM || system > MAX_SYSTEM) {
-    return INVALID_SYSTEM;
+    system = 10;
   }
 
   size_t size = 0;
