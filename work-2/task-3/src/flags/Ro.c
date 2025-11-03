@@ -1,17 +1,16 @@
 #include "../../include/flags.h"
+#include "../../include/returnStatus.h"
 #include <stdlib.h>
 #include <string.h>
 
 
 #define COUNT_OF_ROMAN_DIGITS 7
-#define INCORRECT_ROMAN_NUMERAL -1
 
 
 typedef struct {
   char letter;
   int number;
 } romanDigit;
-
 
 typedef enum {
   I = 1,
@@ -24,32 +23,28 @@ typedef enum {
 } romanDigits;
 
 
-int _defineRomanDigit(const char strRomanDigit) {
+returnStatus _defineRomanDigit(const char strRomanDigit, int *result) {
   const romanDigit romanDigits[] = {{'I', I}, {'V', V}, {'X', X}, {'L', L}, {'C', C}, {'D', D}, {'M', M}};
 
   for (size_t i = 0; i != COUNT_OF_ROMAN_DIGITS; ++i) {
     if (strRomanDigit == romanDigits[i].letter) {
-      return romanDigits[i].number;
+      *result = romanDigits[i].number;
+      return OK;
     }
   }
-  return 0;
+  return INVALID_ROMAN_DIGIT;
 }
 
 
-int _isCorrectRomanDigit(const int romanDigit) {
-  return romanDigit > 0;
-}
-
-
-int _areCorrectRepeatsOfRomanDigits(const char *strRomanNumeral) {
+returnStatus _areCorrectRepeatsOfRomanDigits(const char *strRomanNumeral) {
   const char *incorrectSubstrs[] = {"VV", "LL", "DD", "IIII", "XXXX", "CCCC", "MMMM"};
 
   for (size_t i = 0; i != COUNT_OF_ROMAN_DIGITS; ++i) {
     if (strstr(strRomanNumeral, incorrectSubstrs[i])) {
-      return 0;
+      return INVALID_ROMAN_NUMERAL;
     }
   }
-  return 1;
+  return OK;
 }
 
 
@@ -61,9 +56,9 @@ int _defineSummandForResult(const int prevRomanDigit, const int romanDigit) {
 }
 
 
-int flagRo(const char *strRomanNumeral) {
-  if (!_areCorrectRepeatsOfRomanDigits(strRomanNumeral)) {
-    return INCORRECT_ROMAN_NUMERAL;
+returnStatus flagRo(const char *strRomanNumeral, int *_result) {
+  if (_areCorrectRepeatsOfRomanDigits(strRomanNumeral) != OK) {
+    return INVALID_ROMAN_NUMERAL;
   }
 
   int result = 0;
@@ -71,9 +66,8 @@ int flagRo(const char *strRomanNumeral) {
   const size_t len = strlen(strRomanNumeral);
 
   for (size_t i = 0; i != len; ++i) {
-    romanDigit = _defineRomanDigit(strRomanNumeral[i]);
-    if (!_isCorrectRomanDigit(romanDigit)) {
-      return INCORRECT_ROMAN_NUMERAL;
+    if (_defineRomanDigit(strRomanNumeral[i], &romanDigit) != OK) {
+      return INVALID_ROMAN_DIGIT;
     }
     
     if (i > 0) {
@@ -84,5 +78,6 @@ int flagRo(const char *strRomanNumeral) {
   }
   result += romanDigit;
   
-  return result;
+  *_result = result;
+  return OK;
 }

@@ -2,8 +2,11 @@
 #define FLAGS_H
 
 
+#include "./returnStatus.h"
+
+
 // Вычислить целое число типа `int`, записанное римскими цифрами
-int flagRo(const char *str);
+returnStatus flagRo(const char *str, int *_result);
 
 
 /* 
