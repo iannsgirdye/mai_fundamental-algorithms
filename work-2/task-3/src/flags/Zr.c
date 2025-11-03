@@ -6,7 +6,7 @@
 #define FIBONACCI_CAPACITY 50  // меньше 50 чисел Фибоначчи не превосходит INT_MAX
 
 
-size_t fibonacci(int fibonacciValues[], int maxNumber) {
+size_t fibonacci(unsigned int fibonacciValues[], unsigned int maxNumber) {
   if (maxNumber == 0) {
     return 0;
   }
@@ -26,8 +26,8 @@ size_t fibonacci(int fibonacciValues[], int maxNumber) {
 }
 
 
-void flagZr(int number, char *zeckendorf) {
-  int fibonacciValues[FIBONACCI_CAPACITY];
+void flagZr(unsigned int number, char *zeckendorf) {
+  unsigned int fibonacciValues[FIBONACCI_CAPACITY];
   size_t FibonacciValuesCount = fibonacci(fibonacciValues, number);
 
   zeckendorf[FibonacciValuesCount] = '\0';

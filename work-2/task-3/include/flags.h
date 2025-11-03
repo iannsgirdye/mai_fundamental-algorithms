@@ -15,7 +15,7 @@ returnStatus flagRo(const char *str, int *_result);
 от младшего к старшему слеванаправо с дополнительной единицей
 в конце записи, репрезентирующей окончание записи)
 */
-void flagZr(int number, char *zeckendorf);
+void flagZr(unsigned int number, char *zeckendorf);
 
 
 #endif
