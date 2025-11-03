@@ -1,83 +1,37 @@
 #include "../../include/flags.h"
 #include "../../include/returnStatus.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 
-#define COUNT_OF_ROMAN_DIGITS 7
+#define MIN_ROMAN_NUMERAL 0
+#define MAX_ROMAN_NUMERAL 3999
+#define PARTS_COUNT 4
+#define TYPES_COUNT 10
 
 
-typedef struct {
-  char letter;
-  int number;
-} romanDigit;
-
-typedef enum {
-  I = 1,
-  V = 5,
-  X = 10,
-  L = 50,
-  C = 100,
-  D = 500,
-  M = 1000
-} romanDigits;
-
-
-returnStatus _defineRomanDigit(const char strRomanDigit, int *result) {
-  const romanDigit romanDigits[] = {{'I', I}, {'V', V}, {'X', X}, {'L', L}, {'C', C}, {'D', D}, {'M', M}};
-
-  for (size_t i = 0; i != COUNT_OF_ROMAN_DIGITS; ++i) {
-    if (strRomanDigit == romanDigits[i].letter) {
-      *result = romanDigits[i].number;
-      return OK;
-    }
-  }
-  return INVALID_ROMAN_DIGIT;
-}
-
-
-returnStatus _areCorrectRepeatsOfRomanDigits(const char *strRomanNumeral) {
-  const char *incorrectSubstrs[] = {"VV", "LL", "DD", "IIII", "XXXX", "CCCC", "MMMM"};
-
-  for (size_t i = 0; i != COUNT_OF_ROMAN_DIGITS; ++i) {
-    if (strstr(strRomanNumeral, incorrectSubstrs[i])) {
-      return INVALID_ROMAN_NUMERAL;
-    }
-  }
-  return OK;
-}
-
-
-int _summandForResult(const int prevRomanDigit, const int romanDigit) {
-  if (prevRomanDigit >= romanDigit) {
-    return prevRomanDigit;
-  }
-  return -prevRomanDigit;
-}
-
-
-returnStatus flagRo(const char *strRomanNumeral, int *_result) {
-  if (_areCorrectRepeatsOfRomanDigits(strRomanNumeral) != OK) {
+returnStatus flagRo(const int number, char *strRomanNumeral) {
+  if (number < MIN_ROMAN_NUMERAL || number > MAX_ROMAN_NUMERAL) {
     return INVALID_ROMAN_NUMERAL;
   }
 
-  int result = 0;
-  int romanDigit, prevRomanDigit;
-  const size_t len = strlen(strRomanNumeral);
-
-  for (size_t i = 0; i != len; ++i) {
-    if (_defineRomanDigit(strRomanNumeral[i], &romanDigit) != OK) {
-      return INVALID_ROMAN_DIGIT;
-    }
-    
-    if (i > 0) {
-      result += _summandForResult(prevRomanDigit, romanDigit);
-    }
-
-    prevRomanDigit = romanDigit;
-  }
-  result += romanDigit;
+  const char *romanParts[PARTS_COUNT][TYPES_COUNT] = {
+    {"", "M", "MM", "MMM"},
+    {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"},
+    {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"},
+    {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"}
+  };
+  const int numberParts[PARTS_COUNT] = {
+    number / 1000,
+    (number / 100) % 10,
+    (number / 10) % 10,
+    number % 10
+  };
   
-  *_result = result;
+  for (size_t i = 0; i != PARTS_COUNT; ++i) {
+    strcat(strRomanNumeral, romanParts[i][numberParts[i]]);  
+  }
+
   return OK;
 }

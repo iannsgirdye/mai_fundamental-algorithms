@@ -5,8 +5,8 @@
 #include "./returnStatus.h"
 
 
-// Вычислить целое число типа `int`, записанное римскими цифрами
-returnStatus flagRo(const char *str, int *_result);
+// Записать целое число типа `int` римскими цифрами
+returnStatus flagRo(const int number, char *strRomanNumeral);
 
 
 /* 
