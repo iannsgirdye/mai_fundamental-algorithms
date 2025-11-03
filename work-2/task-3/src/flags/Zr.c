@@ -34,13 +34,20 @@ returnStatus fibonacci(unsigned int fibonacciValues[], unsigned int maxNumber, s
 
 
 returnStatus flagZr(unsigned int number, char *zeckendorf) {
+  if (number == 0) {
+    zeckendorf[0] = '1', zeckendorf[1] = '\0';
+    return OK;
+  } else if (number == 1) {
+    zeckendorf[0] = '1', zeckendorf[1] = '1', zeckendorf[2] = '\0';
+    return OK;
+  }
+
   unsigned int fibonacciValues[FIBONACCI_CAPACITY];
   size_t fibonacciSize;
   if (fibonacci(fibonacciValues, number, &fibonacciSize) != OK) {
     return INVALID_ZECKENDORF_NUMBER;
   }
 
-  // 0-й элемент последовательности Фибоначчи не учитывается
   zeckendorf[fibonacciSize] = '\0';
   zeckendorf[fibonacciSize - 1] = '1';
   for (size_t i = fibonacciSize - 1; i != 0; --i) {
