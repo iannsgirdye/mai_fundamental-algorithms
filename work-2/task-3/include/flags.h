@@ -28,4 +28,15 @@ returnStatus flagZr(unsigned int number, char *zeckendorf);
 returnStatus flagsCvCV(int number, const int system, char *result, const int isCapitalize);
 
 
+/*
+Записать результат перевода строкового представления целого числа
+в системе счисления с заданным основанием в систему счисления с основанием `10`
+(при обработке флага первым параметром функции, “снимаемым” со стека, является строка,
+описываемая значением типа `char *`, вторым - основание исходной системы счисления
+в диапазоне `[2..36]` (при основании системы счисления, не входящем в диапазон,
+значение основания системы счисления устанавливается равным `10`));
+*/
+returnStatus flagsToTO(const char number[], const int system, int *result, const int isCapitalize);
+
+
 #endif
