@@ -48,7 +48,7 @@ returnStatus _areCorrectRepeatsOfRomanDigits(const char *strRomanNumeral) {
 }
 
 
-int _defineSummandForResult(const int prevRomanDigit, const int romanDigit) {
+int _summandForResult(const int prevRomanDigit, const int romanDigit) {
   if (prevRomanDigit >= romanDigit) {
     return prevRomanDigit;
   }
@@ -71,7 +71,7 @@ returnStatus flagRo(const char *strRomanNumeral, int *_result) {
     }
     
     if (i > 0) {
-      result += _defineSummandForResult(prevRomanDigit, romanDigit);
+      result += _summandForResult(prevRomanDigit, romanDigit);
     }
 
     prevRomanDigit = romanDigit;
