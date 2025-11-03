@@ -5,28 +5,28 @@
 #include <limits.h>
 
 
-#define FIBONACCI_CAPACITY 50  // меньше 50 чисел Фибоначчи не превосходит INT_MAX
+#define FIBONACCI_CAPACITY 64  // меньше 64 чисел Фибоначчи не превосходит UINT_MAX
 
 
 returnStatus fibonacci(unsigned int fibonacciValues[], unsigned int maxNumber, size_t *size) {
   if (maxNumber == 0) {
-    return 0;
+    *size = 0;
+    return OK;
   }
   if (maxNumber == 1) {
-    return 1;
+    *size = 1;
+    return OK;
   }
 
-  size_t i = 2;
-  fibonacciValues[0] = 0;
-  fibonacciValues[1] = 1;
-  while (fibonacciValues[i - 1] <= maxNumber - fibonacciValues[i - 2]) {
-    if (fibonacciValues[i] > INT_MAX - fibonacciValues[i - 1]) {
+  size_t i = 1;
+  fibonacciValues[0] = 0, fibonacciValues[1] = 1;
+  while (fibonacciValues[i] <= maxNumber) {
+    if (fibonacciValues[i] > UINT_MAX - fibonacciValues[i - 1]) {
       return INVALID_ZECKENDORF_NUMBER;
     }
-    fibonacciValues[i] = fibonacciValues[i - 1] + fibonacciValues[i - 2];
     ++i;
+    fibonacciValues[i] = fibonacciValues[i - 1] + fibonacciValues[i - 2];
   }
-  fibonacciValues[i] = fibonacciValues[i - 1] + fibonacciValues[i - 2];
   
   *size = i;
   return OK;
