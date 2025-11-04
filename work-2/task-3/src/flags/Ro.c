@@ -11,7 +11,7 @@
 #define TYPES_COUNT 10
 
 
-returnStatus flagRo(const int number, char *strRomanNumeral) {
+returnStatus flagRo(const int number, char *romanNumeral) {
   if (number < MIN_ROMAN_NUMERAL || number > MAX_ROMAN_NUMERAL) {
     return INVALID_ROMAN_NUMERAL;
   }
@@ -30,7 +30,7 @@ returnStatus flagRo(const int number, char *strRomanNumeral) {
   };
   
   for (size_t i = 0; i != PARTS_COUNT; ++i) {
-    strcat(strRomanNumeral, romanParts[i][numberParts[i]]);  
+    strcat(romanNumeral, romanParts[i][numberParts[i]]);  
   }
 
   return OK;

@@ -6,7 +6,7 @@
 
 
 // Записать в `romanNumeral` римскими цифрами целое число типа `int` (`number`)
-returnStatus flagRo(const int number, char *strRomanNumeral);
+returnStatus flagRo(const int number, char *romanNumeral);
 
 
 /* 
