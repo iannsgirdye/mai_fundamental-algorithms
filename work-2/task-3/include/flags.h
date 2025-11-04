@@ -36,4 +36,12 @@ returnStatus flagsCvCV(int number, int *system, const int isCapitalize, char *nu
 returnStatus flagsToTO(const char *numberInSystem, int *system, const int isCapitalize, int *number);
 
 
+/*
+Записать в `dump` дамп памяти значения числа типа `type`
+(строковые представления байтов разделены одним символом пробела);
+`type`: `i` — int, `u` — unsigned int, `f` — float, `d` — double
+*/
+returnStatus flagsM(const void *number, const char type, char *dump);
+
+
 #endif
