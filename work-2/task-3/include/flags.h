@@ -29,14 +29,12 @@ returnStatus flagsCvCV(int number, int system, char *result, const int isCapital
 
 
 /*
-Записать результат перевода строкового представления целого числа
-в системе счисления с заданным основанием в систему счисления с основанием `10`
-(при обработке флага первым параметром функции, “снимаемым” со стека, является строка,
-описываемая значением типа `char *`, вторым - основание исходной системы счисления
-в диапазоне `[2..36]` (при основании системы счисления, не входящем в диапазон,
-значение основания системы счисления устанавливается равным `10`));
+Записать в `*number` целое число типа `int` на основе его строкового представления `numberInSystem`
+в системе счисления `*system` (в диапазоне `[2..36]`, иначе устанавливается равной `10`).
+Параметр `isCapitalize` равен `1`, если в `numberInSystem` символы букв записаны
+в верхнем регистре, иначе — `0`
 */
-returnStatus flagsToTO(const char *numberInSystem, int *system, const int isCapitalize, int *result);
+returnStatus flagsToTO(const char *numberInSystem, int *system, const int isCapitalize, int *number);
 
 
 #endif
