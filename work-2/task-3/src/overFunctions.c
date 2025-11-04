@@ -186,7 +186,6 @@ returnStatus _makeString(_string *string, const char *_Format, va_list args) {
   size_t i = 0;
 
   while (_Format[i] != '\0') {
-    printf("[%c %i]\n", _Format[i], i);
     result[0] = '\0';
     if (_Format[i] != '%') {
       sprintf(result, "%c", _Format[i]);
