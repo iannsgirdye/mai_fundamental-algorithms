@@ -24,7 +24,7 @@ returnStatus flagZr(unsigned int number, char *zeckendorf);
 Параметр `isCapitalize` равен `1`, если в `numberInSystem` символы букв записаны
 в верхнем регистре, иначе — `0`
 */
-returnStatus flagsCvCV(int number, int system, char *result, const int isCapitalize);
+returnStatus flagsCvCV(int number, int *system, const int isCapitalize, char *numberInSystem);
 
 
 /*

@@ -24,28 +24,28 @@ char _digit(const char digit, const int isCapitalize) {
 }
 
 
-returnStatus flagsCvCV(int number, int system, char *result, const int isCapitalize) {
-  if (system < MIN_SYSTEM || system > MAX_SYSTEM) {
-    system = 10;
+returnStatus flagsCvCV(int number, int *system, const int isCapitalize, char *numberInSystem) {
+  if (*system < MIN_SYSTEM || *system > MAX_SYSTEM) {
+    *system = 10;
   }
 
   size_t size = 0;
   const char sign = (number > 0) ? 1 : -1;
   number *= sign;
   if (sign == -1) {
-    result[0] = '-';
-    size++;
+    numberInSystem[0] = '-';
+    ++size;
   }
 
   while (number > 0) {
-    result[size] = _digit(number % system, isCapitalize);
-    number /= system;
+    numberInSystem[size] = _digit(number % *system, isCapitalize);
+    number /= *system;
     ++size;
   }
-  result[size] = '\0';
+  numberInSystem[size] = '\0';
 
   for (size_t i = (sign == 1) ? 0 : 1; i != size / 2; ++i) {
-    swap(&result[i], &result[size - 1 - i]);
+    swap(&numberInSystem[i], &numberInSystem[size - 1 - i]);
   }
 
   return OK;
