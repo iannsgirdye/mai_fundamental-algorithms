@@ -18,30 +18,31 @@ char _charDigit(const char digit, const int isCapitalize) {
 }
 
 
-int _isGoodDigit(const char digit, const int isCapitalize) {
+returnStatus _isGoodDigit(const char digit, const int isCapitalize) {
   if (isCapitalize && digit >= 'a' && digit <= 'z') {
-    return 0;
+    return INVALID_SYSTEM_DIGIT;
   }
   if (!isCapitalize && digit >= 'A' && digit <= 'Z') {
-    return 0;
+    return INVALID_SYSTEM_DIGIT;
   }
-  return 1;
+  return OK;
 }
 
 
-returnStatus flagsToTO(const char number[], int system, int *result, const int isCapitalize) {
-  if (system < MIN_SYSTEM || system > MAX_SYSTEM) {
-    system = 10;
+returnStatus flagsToTO(const char *numberInSystem, int *system, const int isCapitalize, int *number) {
+  if (*system < MIN_SYSTEM || *system > MAX_SYSTEM) {
+    *system = 10;
   }
+  *number = 0;
 
-  for (size_t i = 0; number[i] != '\0'; ++i) {
-    if (!_isGoodDigit(number[i], isCapitalize)) {
+  for (size_t i = 0; numberInSystem[i] != '\0'; ++i) {
+    if (_isGoodDigit(numberInSystem[i], isCapitalize) != OK) {
       return INVALID_SYSTEM_DIGIT;
     }
-    *result += _charDigit(number[i], isCapitalize);
-    *result *= system;
+    *number += _charDigit(numberInSystem[i], isCapitalize);
+    *number *= *system;
   }
-  *result /= system;
+  *number /= *system;
 
   return OK;
 }
