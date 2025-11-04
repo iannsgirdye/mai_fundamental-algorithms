@@ -1,6 +1,5 @@
 #include "../../include/flags.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 
 #define MIN_SYSTEM 2
