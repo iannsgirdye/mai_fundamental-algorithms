@@ -29,6 +29,11 @@ returnStatus flagsCvCV(int number, int *system, const int isCapitalize, char *nu
     *system = 10;
   }
 
+  if (number == 0) {
+    numberInSystem[0] = '0', numberInSystem[1] = '\0';
+    return OK;
+  }
+
   size_t size = 0;
   const char sign = (number > 0) ? 1 : -1;
   number *= sign;
