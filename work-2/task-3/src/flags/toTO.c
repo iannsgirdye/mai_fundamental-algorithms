@@ -1,4 +1,5 @@
 #include "../../include/flags.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 
@@ -28,20 +29,21 @@ returnStatus _isGoodDigit(const char digit, const int isCapitalize) {
 }
 
 
-returnStatus flagsToTO(const char *numberInSystem, int *system, const int isCapitalize, int *number) {
+returnStatus flagsToTO(const char *numberInSystem, int *system, const int isCapitalize, char *number) {
   if (*system < MIN_SYSTEM || *system > MAX_SYSTEM) {
     *system = 10;
   }
-  *number = 0;
+  int _number = 0;
 
   for (size_t i = 0; numberInSystem[i] != '\0'; ++i) {
     if (_isGoodDigit(numberInSystem[i], isCapitalize) != OK) {
       return INVALID_SYSTEM_DIGIT;
     }
-    *number += _charDigit(numberInSystem[i], isCapitalize);
-    *number *= *system;
+    _number += _charDigit(numberInSystem[i], isCapitalize);
+    _number *= *system;
   }
-  *number /= *system;
+  _number /= *system;
+  sprintf(number, "%d", _number);
 
   return OK;
 }

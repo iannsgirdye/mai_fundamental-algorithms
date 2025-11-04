@@ -33,7 +33,7 @@ returnStatus flagsCvCV(int number, int *system, const int isCapitalize, char *nu
 Параметр `isCapitalize` равен `1`, если в `numberInSystem` символы букв записаны
 в верхнем регистре, иначе — `0`
 */
-returnStatus flagsToTO(const char *numberInSystem, int *system, const int isCapitalize, int *number);
+returnStatus flagsToTO(const char *numberInSystem, int *system, const int isCapitalize, char *number);
 
 
 /*
