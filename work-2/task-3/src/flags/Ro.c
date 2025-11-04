@@ -28,6 +28,7 @@ returnStatus flagRo(const int number, char *romanNumeral) {
     number % 10
   };
   
+  romanNumeral[0] = '\0';
   for (size_t i = 0; i != PARTS_COUNT; ++i) {
     strcat(romanNumeral, romanParts[i][numberParts[i]]);  
   }
