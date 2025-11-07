@@ -54,13 +54,12 @@ int _stringWillOverflow(_string *string, const char *substring) {
 
 
 returnStatus reallocStr(_string *string) {
-  string->capacity *= 2;
-  char *tmpStr = (char *)realloc(string->str, string->capacity);
+  char *tmpStr = (char *)realloc(string->str, string->capacity * 2);
   if (tmpStr == NULL) {
-    free(string->str);
     return INVALID_GET_MEMORY;
   }
   string->str = tmpStr;
+  string->capacity *= 2;
   return OK;
 }
 
@@ -169,13 +168,17 @@ returnStatus _useSpecialFlag(const char *flag, va_list args, char *result) {
 }
 
 
-void _printResult(_string *string, char *result) {
+returnStatus _printResult(_string *string, char *result) {
   if (_stringWillOverflow(string, result)) {
-    reallocStr(string);
+    if (reallocStr(string) != OK) {
+      return INVALID_GET_MEMORY;
+    };
   }
 
   strcat(string->str, result);
   string->size += strlen(result);
+  
+  return OK;
 }
 
 
@@ -188,24 +191,36 @@ returnStatus _makeString(_string *string, const char *_Format, va_list args) {
     result[0] = '\0';
     if (_Format[i] != '%') {
       sprintf(result, "%c", _Format[i]);
-      _printResult(string, result);
+      if (_printResult(string, result) == INVALID_GET_MEMORY) {
+        string->size = 0;
+        return INVALID_GET_MEMORY;
+      };
       i += 1;
       continue;
     } 
     switch (_parseFlag(_Format, i, flag)) {
       case PERCENT_FLAG:
         sprintf(result, "%c", '%');
-        _printResult(string, result);
+        if (_printResult(string, result) == INVALID_GET_MEMORY) {
+          string->size = 0;
+          return INVALID_GET_MEMORY;
+        }
         i += PERCENT_FLAG_LEN;
         break;
       case DEFAULT_FLAG:
         sprintf(result, flag, va_arg(args, long long int));
-        _printResult(string, result);
+        if (_printResult(string, result) == INVALID_GET_MEMORY) {
+          string->size = 0;
+          return INVALID_GET_MEMORY;
+        }
         i += strlen(flag);
         break;
       case SPECIAL_FLAG:
         _useSpecialFlag(flag, args, result);
-        _printResult(string, result);
+        if (_printResult(string, result) == INVALID_GET_MEMORY) {
+          string->size = 0;
+          return INVALID_GET_MEMORY;
+        }
         i += SPECIAL_FLAG_LEN;
         break;
       default:
