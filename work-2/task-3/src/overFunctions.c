@@ -244,10 +244,7 @@ int overfprintf(FILE *_File, const char *_Format, ...) {
   va_list args;
   va_start(args, _Format);
 
-  if (_makeString(&string, _Format, args) != OK) {
-    string.size = 0;
-    string.str[0] = '\0';
-  };
+  _makeString(&string, _Format, args);
   fputs(string.str, _File);
 
   va_end(args);
@@ -272,10 +269,7 @@ int oversprintf(char *_Dest, const char *_Format, ...) {
   va_list args;
   va_start(args, _Format);
 
-  if (_makeString(&string, _Format, args) != OK) {
-    string.size = 0;
-    string.str[0] = '\0';
-  }
+  _makeString(&string, _Format, args);
   strcpy(_Dest, string.str);
 
   va_end(args);
