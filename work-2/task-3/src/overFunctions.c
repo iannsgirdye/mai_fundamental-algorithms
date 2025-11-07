@@ -1,5 +1,6 @@
 #include "../include/overFunctions.h"
 #include "../include/flags.h"
+#include "../include/returnStatus.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
