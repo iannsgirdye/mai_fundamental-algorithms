@@ -69,7 +69,7 @@ void _defineFlag(const char *_Format, const size_t i, char *flag, int isSpecialF
   size_t len;
 
   if (isSpecialFlag) {
-    len = PERCENT_FLAG_LEN;  
+    len = SPECIAL_FLAG_LEN;  
   } else {
     switch (_Format[i + 1]) {
       case 'z':
