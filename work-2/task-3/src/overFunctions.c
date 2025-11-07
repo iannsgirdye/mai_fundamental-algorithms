@@ -168,7 +168,7 @@ returnStatus _useSpecialFlag(const char *flag, va_list args, char *result) {
 }
 
 
-returnStatus _printResult(_string *string, char *result) {
+returnStatus _printResult(_string *string, const char *result) {
   if (_stringWillOverflow(string, result)) {
     if (reallocStr(string) != OK) {
       return INVALID_GET_MEMORY;
@@ -177,6 +177,7 @@ returnStatus _printResult(_string *string, char *result) {
 
   strcat(string->str, result);
   string->size += strlen(result);
+  string->str[string->size] = '\0';
   
   return OK;
 }
@@ -223,7 +224,6 @@ returnStatus _makeString(_string *string, const char *_Format, va_list args) {
         return INVALID_FLAG;
     }
   }
-  string->str[string->size] = '\0';
 
   return OK;
 }
@@ -235,6 +235,7 @@ int overfprintf(FILE *_File, const char *_Format, ...) {
   if (string.str == NULL) {
     return string.size;
   }
+  string.str[0] = '\0';
 
   va_list args;
   va_start(args, _Format);
@@ -258,6 +259,7 @@ int oversprintf(char *_Dest, const char *_Format, ...) {
   if (string.str == NULL) {
     return string.size;
   }
+  string.str[0] = '\0';
 
   va_list args;
   va_start(args, _Format);
