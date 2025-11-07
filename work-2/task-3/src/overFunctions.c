@@ -262,7 +262,10 @@ int oversprintf(char *_Dest, const char *_Format, ...) {
   va_list args;
   va_start(args, _Format);
 
-  _makeString(&string, _Format, args);
+  if (_makeString(&string, _Format, args) != OK) {
+    string.size = 0;
+    string.str[0] = '\0';
+  }
   strcpy(_Dest, string.str);
 
   va_end(args);
