@@ -10,8 +10,16 @@
 #define STRING_START_CAPACITY 32
 #define RESULT_CAPACITY       64
 #define FLAG_CAPACITY          8
-#define PERCENT_FLAG_LEN       2
-#define SPECIAL_FLAG_LEN       3
+
+
+typedef enum {
+  PERCENT_FLAG_LEN = 2,
+  SPECIAL_FLAG_LEN = 3,
+  ZU_FLAG_LEN = 3,
+  NO_PREFIX_FLAG_LEN = 2,
+  x1_PREFIX_FLAG_LEN = 3,
+  x2_PREFIX_FLAG_LEN = 4
+} lensFlags;
 
 
 typedef enum {
@@ -59,21 +67,21 @@ returnStatus reallocStr(_string *string) {
 
 void _defineFlag(const char *_Format, const size_t i, char *flag, int isSpecialFlag) {
   flag[0] = '%', flag[1] = '\0';
-  size_t len = 1;
+  size_t len;
 
   if (isSpecialFlag) {
-    len = 3;  
+    len = PERCENT_FLAG_LEN;  
   } else {
     switch (_Format[i + 1]) {
       case 'z':
-        len = 3;
+        len = ZU_FLAG_LEN;
         break;
       case 'h':
       case 'l':
-        len = (_Format[i + 1] == _Format[i + 2]) ? 4 : 3;
+        len = (_Format[i + 1] == _Format[i + 2]) ? x2_PREFIX_FLAG_LEN : x1_PREFIX_FLAG_LEN;
         break;
       default:
-        len = 2;
+        len = NO_PREFIX_FLAG_LEN;
     }
   }
 
