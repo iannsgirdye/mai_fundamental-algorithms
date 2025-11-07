@@ -12,6 +12,14 @@
 #define FLAG_CAPACITY          8
 
 
+typedef enum {
+  PERCENT_FLAG,
+  DEFAULT_FLAG,
+  SPECIAL_FLAG,
+  STRANGE_FLAG
+} flagType;
+
+
 enum lensFlags {
   PERCENT_FLAG_LEN = 2,
   SPECIAL_FLAG_LEN = 3,
@@ -103,9 +111,9 @@ int _idSpecialFlag(const char *flag) {
 }
 
 
-returnStatus _parseFlag(const char *_Format, size_t i, char *flag) {
+flagType _parseFlag(const char *_Format, size_t i, char *flag) {
   if (_Format[i + 1] == '\0') {
-    return INVALID_FLAG;
+    return STRANGE_FLAG;
   }
   if (_Format[i + 1] == '%') {
     return PERCENT_FLAG;
