@@ -217,7 +217,7 @@ returnStatus _makeString(_string *string, const char *_Format, va_list args) {
     }
   }
 
-  string->str[string->size] = 0;
+  string->str[string->size] = '\0';
 
   return OK;
 }
