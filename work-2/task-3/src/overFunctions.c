@@ -66,7 +66,7 @@ void _defineFlag(const char *_Format, const size_t i, char *flag, int isSpecialF
   } else {
     switch (_Format[i + 1]) {
       case 'z':
-        len = 4;
+        len = 3;
         break;
       case 'h':
       case 'l':
@@ -77,7 +77,7 @@ void _defineFlag(const char *_Format, const size_t i, char *flag, int isSpecialF
     }
   }
 
-  strncat(flag, &_Format[i + 1], len);
+  strncat(flag, &_Format[i + 1], len - 1);
   flag[len] = '\0';
 }
 
