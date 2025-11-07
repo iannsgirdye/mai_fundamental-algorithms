@@ -12,17 +12,17 @@
 #define FLAG_CAPACITY          8
 
 
-typedef enum {
+enum lensFlags {
   PERCENT_FLAG_LEN = 2,
   SPECIAL_FLAG_LEN = 3,
   ZU_FLAG_LEN = 3,
   NO_PREFIX_FLAG_LEN = 2,
   x1_PREFIX_FLAG_LEN = 3,
   x2_PREFIX_FLAG_LEN = 4
-} lensFlags;
+};
 
 
-typedef enum {
+enum idSpecialFlags {
   Ro,
   Zr,
   Cv,
@@ -33,7 +33,7 @@ typedef enum {
   mu,
   md,
   mf
-} idSpecialFlags;
+};
 
 
 typedef struct {
