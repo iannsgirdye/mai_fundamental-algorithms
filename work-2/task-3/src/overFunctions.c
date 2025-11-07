@@ -57,17 +57,6 @@ returnStatus reallocStr(_string *string) {
 }
 
 
-int _isDefaultFlag(const char letter) {
-  const char specialFlagsFirstLetters[6] = {'R', 'Z', 'C', 't', 'T', 'm'};
-  for (size_t i = 0; i != 6; ++i) {
-    if (letter == specialFlagsFirstLetters[i]) {
-      return 0;
-    }
-  }
-  return 1;
-}
-
-
 void _defineFlag(const char *_Format, const size_t i, char *flag, int isSpecialFlag) {
   flag[0] = '%', flag[1] = '\0';
   size_t len = 1;
@@ -108,20 +97,20 @@ int _idSpecialFlag(const char *flag) {
 
 
 returnStatus _parseFlag(const char *_Format, size_t i, char *flag) {
+  if (_Format[i + 1] == '\0') {
+    return INVALID_FLAG;
+  }
   if (_Format[i + 1] == '%') {
     return PERCENT_FLAG;
   }
-  if (isalpha(_Format[i + 1])) {
-    if (_isDefaultFlag(_Format[i + 1])) {
-      _defineFlag(_Format, i, flag, 0);
-      return DEFAULT_FLAG;
-    }
-    if (isalpha(_Format[i + 2])) {
-      _defineFlag(_Format, i, flag, 1);
+  if (isalpha(_Format[i + 1]) && isalpha(_Format[i + 2])) {
+    _defineFlag(_Format, i, flag, 1);
+    if (_idSpecialFlag(flag) != -1) {
       return SPECIAL_FLAG;
     }
   }
-  return INVALID_FLAG;
+  _defineFlag(_Format, i, flag, 0);
+  return DEFAULT_FLAG;
 }
 
 
