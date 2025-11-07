@@ -1,5 +1,6 @@
 #include "../include/overFunctions.h"
 #include "../include/flags.h"
+#include "../include/returnStatus.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
@@ -13,16 +14,24 @@
 
 
 typedef enum {
+  PERCENT_FLAG,
+  DEFAULT_FLAG,
+  SPECIAL_FLAG,
+  STRANGE_FLAG
+} flagType;
+
+
+enum lensFlags {
   PERCENT_FLAG_LEN = 2,
   SPECIAL_FLAG_LEN = 3,
   ZU_FLAG_LEN = 3,
   NO_PREFIX_FLAG_LEN = 2,
   x1_PREFIX_FLAG_LEN = 3,
   x2_PREFIX_FLAG_LEN = 4
-} lensFlags;
+};
 
 
-typedef enum {
+enum idSpecialFlags {
   Ro,
   Zr,
   Cv,
@@ -33,7 +42,7 @@ typedef enum {
   mu,
   md,
   mf
-} idSpecialFlags;
+};
 
 
 typedef struct {
@@ -103,9 +112,9 @@ int _idSpecialFlag(const char *flag) {
 }
 
 
-returnStatus _parseFlag(const char *_Format, size_t i, char *flag) {
+flagType _parseFlag(const char *_Format, size_t i, char *flag) {
   if (_Format[i + 1] == '\0') {
-    return INVALID_FLAG;
+    return STRANGE_FLAG;
   }
   if (_Format[i + 1] == '%') {
     return PERCENT_FLAG;
@@ -190,38 +199,31 @@ returnStatus _makeString(_string *string, const char *_Format, va_list args) {
 
   while (_Format[i] != '\0') {
     result[0] = '\0';
+
     if (_Format[i] != '%') {
       sprintf(result, "%c", _Format[i]);
-      if (_printResult(string, result) == INVALID_GET_MEMORY) {
-        return INVALID_GET_MEMORY;
-      }
       i += 1;
-      continue;
-    } 
-    switch (_parseFlag(_Format, i, flag)) {
-      case PERCENT_FLAG:
-        sprintf(result, "%c", '%');
-        if (_printResult(string, result) == INVALID_GET_MEMORY) {
-          return INVALID_GET_MEMORY;
-        }
-        i += PERCENT_FLAG_LEN;
-        break;
-      case DEFAULT_FLAG:
-        sprintf(result, flag, va_arg(args, long long int));
-        if (_printResult(string, result) == INVALID_GET_MEMORY) {
-          return INVALID_GET_MEMORY;
-        }
-        i += strlen(flag);
-        break;
-      case SPECIAL_FLAG:
-        _useSpecialFlag(flag, args, result);
-        if (_printResult(string, result) == INVALID_GET_MEMORY) {
-          return INVALID_GET_MEMORY;
-        }
-        i += SPECIAL_FLAG_LEN;
-        break;
-      default:
-        return INVALID_FLAG;
+    } else {
+      switch (_parseFlag(_Format, i, flag)) {
+        case PERCENT_FLAG:
+          sprintf(result, "%c", '%');
+          i += PERCENT_FLAG_LEN;
+          break;
+        case DEFAULT_FLAG:
+          sprintf(result, flag, va_arg(args, long long int));
+          i += strlen(flag);
+          break;
+        case SPECIAL_FLAG:
+          _useSpecialFlag(flag, args, result);
+          i += SPECIAL_FLAG_LEN;
+          break;
+        default:
+          return INVALID_FLAG;
+      }
+    }
+    
+    if (_printResult(string, result) == INVALID_GET_MEMORY) {
+      return INVALID_GET_MEMORY;
     }
   }
 
@@ -230,6 +232,10 @@ returnStatus _makeString(_string *string, const char *_Format, va_list args) {
 
 
 int overfprintf(FILE *_File, const char *_Format, ...) {
+  if (_File == NULL || _Format == NULL) {
+    return 0;
+  }
+
   _string string = {.size = 0, .capacity = STRING_START_CAPACITY};
   string.str = (char *)malloc(string.capacity);
   if (string.str == NULL) {
@@ -240,10 +246,7 @@ int overfprintf(FILE *_File, const char *_Format, ...) {
   va_list args;
   va_start(args, _Format);
 
-  if (_makeString(&string, _Format, args) != OK) {
-    string.size = 0;
-    string.str[0] = '\0';
-  };
+  _makeString(&string, _Format, args);
   fputs(string.str, _File);
 
   va_end(args);
@@ -254,6 +257,10 @@ int overfprintf(FILE *_File, const char *_Format, ...) {
 
 
 int oversprintf(char *_Dest, const char *_Format, ...) {
+  if (_Dest == NULL || _Format == NULL) {
+    return 0;
+  }
+
   _string string = {.size = 0, .capacity = STRING_START_CAPACITY};
   string.str = (char *)malloc(string.capacity);
   if (string.str == NULL) {
@@ -264,10 +271,7 @@ int oversprintf(char *_Dest, const char *_Format, ...) {
   va_list args;
   va_start(args, _Format);
 
-  if (_makeString(&string, _Format, args) != OK) {
-    string.size = 0;
-    string.str[0] = '\0';
-  }
+  _makeString(&string, _Format, args);
   strcpy(_Dest, string.str);
 
   va_end(args);
