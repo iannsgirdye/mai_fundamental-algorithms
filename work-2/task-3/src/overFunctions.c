@@ -192,9 +192,8 @@ returnStatus _makeString(_string *string, const char *_Format, va_list args) {
     if (_Format[i] != '%') {
       sprintf(result, "%c", _Format[i]);
       if (_printResult(string, result) == INVALID_GET_MEMORY) {
-        string->size = 0;
         return INVALID_GET_MEMORY;
-      };
+      }
       i += 1;
       continue;
     } 
@@ -202,7 +201,6 @@ returnStatus _makeString(_string *string, const char *_Format, va_list args) {
       case PERCENT_FLAG:
         sprintf(result, "%c", '%');
         if (_printResult(string, result) == INVALID_GET_MEMORY) {
-          string->size = 0;
           return INVALID_GET_MEMORY;
         }
         i += PERCENT_FLAG_LEN;
@@ -210,7 +208,6 @@ returnStatus _makeString(_string *string, const char *_Format, va_list args) {
       case DEFAULT_FLAG:
         sprintf(result, flag, va_arg(args, long long int));
         if (_printResult(string, result) == INVALID_GET_MEMORY) {
-          string->size = 0;
           return INVALID_GET_MEMORY;
         }
         i += strlen(flag);
@@ -218,17 +215,14 @@ returnStatus _makeString(_string *string, const char *_Format, va_list args) {
       case SPECIAL_FLAG:
         _useSpecialFlag(flag, args, result);
         if (_printResult(string, result) == INVALID_GET_MEMORY) {
-          string->size = 0;
           return INVALID_GET_MEMORY;
         }
         i += SPECIAL_FLAG_LEN;
         break;
       default:
-        string->size = 0;
         return INVALID_FLAG;
     }
   }
-
   string->str[string->size] = '\0';
 
   return OK;
@@ -245,7 +239,10 @@ int overfprintf(FILE *_File, const char *_Format, ...) {
   va_list args;
   va_start(args, _Format);
 
-  _makeString(&string, _Format, args);
+  if (_makeString(&string, _Format, args) != OK) {
+    string.size = 0;
+    string.str[0] = '\0';
+  };
   fputs(string.str, _File);
 
   va_end(args);
