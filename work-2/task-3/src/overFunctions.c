@@ -230,6 +230,10 @@ returnStatus _makeString(_string *string, const char *_Format, va_list args) {
 
 
 int overfprintf(FILE *_File, const char *_Format, ...) {
+  if (_File == NULL || _Format == NULL) {
+    return 0;
+  }
+
   _string string = {.size = 0, .capacity = STRING_START_CAPACITY};
   string.str = (char *)malloc(string.capacity);
   if (string.str == NULL) {
@@ -254,6 +258,10 @@ int overfprintf(FILE *_File, const char *_Format, ...) {
 
 
 int oversprintf(char *_Dest, const char *_Format, ...) {
+  if (_Dest == NULL || _Format == NULL) {
+    return 0;
+  }
+
   _string string = {.size = 0, .capacity = STRING_START_CAPACITY};
   string.str = (char *)malloc(string.capacity);
   if (string.str == NULL) {
