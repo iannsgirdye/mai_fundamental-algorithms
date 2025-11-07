@@ -190,38 +190,31 @@ returnStatus _makeString(_string *string, const char *_Format, va_list args) {
 
   while (_Format[i] != '\0') {
     result[0] = '\0';
+
     if (_Format[i] != '%') {
       sprintf(result, "%c", _Format[i]);
-      if (_printResult(string, result) == INVALID_GET_MEMORY) {
-        return INVALID_GET_MEMORY;
-      }
       i += 1;
-      continue;
-    } 
-    switch (_parseFlag(_Format, i, flag)) {
-      case PERCENT_FLAG:
-        sprintf(result, "%c", '%');
-        if (_printResult(string, result) == INVALID_GET_MEMORY) {
-          return INVALID_GET_MEMORY;
-        }
-        i += PERCENT_FLAG_LEN;
-        break;
-      case DEFAULT_FLAG:
-        sprintf(result, flag, va_arg(args, long long int));
-        if (_printResult(string, result) == INVALID_GET_MEMORY) {
-          return INVALID_GET_MEMORY;
-        }
-        i += strlen(flag);
-        break;
-      case SPECIAL_FLAG:
-        _useSpecialFlag(flag, args, result);
-        if (_printResult(string, result) == INVALID_GET_MEMORY) {
-          return INVALID_GET_MEMORY;
-        }
-        i += SPECIAL_FLAG_LEN;
-        break;
-      default:
-        return INVALID_FLAG;
+    } else {
+      switch (_parseFlag(_Format, i, flag)) {
+        case PERCENT_FLAG:
+          sprintf(result, "%c", '%');
+          i += PERCENT_FLAG_LEN;
+          break;
+        case DEFAULT_FLAG:
+          sprintf(result, flag, va_arg(args, long long int));
+          i += strlen(flag);
+          break;
+        case SPECIAL_FLAG:
+          _useSpecialFlag(flag, args, result);
+          i += SPECIAL_FLAG_LEN;
+          break;
+        default:
+          return INVALID_FLAG;
+      }
+    }
+    
+    if (_printResult(string, result) == INVALID_GET_MEMORY) {
+      return INVALID_GET_MEMORY;
     }
   }
 
