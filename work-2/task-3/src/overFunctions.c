@@ -10,6 +10,8 @@
 #define STRING_START_CAPACITY 32
 #define RESULT_CAPACITY       64
 #define FLAG_CAPACITY          8
+#define PERCENT_FLAG_LEN       2
+#define SPECIAL_FLAG_LEN       3
 
 
 typedef enum {
@@ -197,7 +199,7 @@ returnStatus _makeString(_string *string, const char *_Format, va_list args) {
       case PERCENT_FLAG:
         sprintf(result, "%c", '%');
         _printResult(string, result);
-        i += 2;
+        i += PERCENT_FLAG_LEN;
         break;
       case DEFAULT_FLAG:
         sprintf(result, flag, va_arg(args, long long int));
@@ -207,7 +209,7 @@ returnStatus _makeString(_string *string, const char *_Format, va_list args) {
       case SPECIAL_FLAG:
         _useSpecialFlag(flag, args, result);
         _printResult(string, result);
-        i += 3;
+        i += SPECIAL_FLAG_LEN;
         break;
       default:
         string->size = 0;
