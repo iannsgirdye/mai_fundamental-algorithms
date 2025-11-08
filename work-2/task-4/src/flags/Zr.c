@@ -46,6 +46,7 @@ returnStatus flagZr(const char *zeckendorf, unsigned int *number) {
     return INVALID_ZECKENDORF_NUMBER;
   }
 
+  *number = 0;
   for (size_t i = 0; i != size - 1; ++i) {
     if (zeckendorf[i] == '1') {
       *number += fibonacciValues[i + 1];
