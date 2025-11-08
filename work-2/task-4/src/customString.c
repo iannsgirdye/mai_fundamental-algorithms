@@ -1,4 +1,4 @@
-#include "../include/string.h"
+#include "../include/customString.h"
 #include "../include/returnStatus.h"
 #include <stdio.h>
 #include <string.h>
