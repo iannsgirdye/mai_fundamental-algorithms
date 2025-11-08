@@ -12,7 +12,7 @@
 returnStatus fibonacci(unsigned int fibonacciValues[], const size_t size) {
   fibonacciValues[0] = 0, fibonacciValues[1] = 1;
   for (size_t i = 2; i != size; ++i) {
-    if (fibonacciValues[i] > UINT_MAX - fibonacciValues[i - 1]) {
+    if (fibonacciValues[i - 1] > UINT_MAX - fibonacciValues[i - 2]) {
       return INVALID_ZECKENDORF_NUMBER;
     }
     fibonacciValues[i] = fibonacciValues[i - 1] + fibonacciValues[i - 2];
