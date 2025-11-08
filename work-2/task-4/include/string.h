@@ -13,7 +13,7 @@ typedef struct {
 } _string;
 
 
-int _stringInit(_string *string);
+returnStatus _stringInit(_string *string);
 int _stringIsFull(_string *string);
 returnStatus _stringPushCh(_string *string, const char ch);
 returnStatus _stringPushStr(_string *string, const char *str);
