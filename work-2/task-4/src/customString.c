@@ -17,8 +17,8 @@ returnStatus _stringInit(_string *string) {
 }
 
 
-int _stringIsFull(_string *string) {
-  return string->size == string->capacity;
+int _stringWillOverflow(_string *string, const size_t size) {
+  return string->size + size > string->capacity;
 }
 
 
@@ -34,7 +34,7 @@ returnStatus _stringRealloc(_string *string) {
 
 
 returnStatus _stringPushCh(_string *string, const char ch) {
-  if (string->size + 1 > string->capacity) {
+  if (_stringWillOverflow(string, 1)) {
     if (_stringRealloc(string) == INVALID_GET_MEMORY) {
       return INVALID_GET_MEMORY;
     }
@@ -48,7 +48,7 @@ returnStatus _stringPushCh(_string *string, const char ch) {
 
 
 returnStatus _stringPushStr(_string *string, const char *subStr) {
-  if (string->size + strlen(subStr) > string->capacity) {
+  if (_stringWillOverflow(string, strlen(subStr))) {
     if (_stringRealloc(string) == INVALID_GET_MEMORY) {
       return INVALID_GET_MEMORY;
     }
