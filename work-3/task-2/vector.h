@@ -138,4 +138,14 @@ void delete_at_vector(Vector *v, size_t index) {
   --(v->size);
 }
 
+VECTOR_TYPE get_at_vector(const Vector *v, size_t index) {
+  if (v == NULL || v->data == NULL) {
+    return;
+  }
+  if (index >= v->size) {
+    return;
+  }
+  return v->data[index];
+}
+
 #endif
