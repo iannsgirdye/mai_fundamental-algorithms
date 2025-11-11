@@ -123,4 +123,19 @@ void push_back_vector(Vector *v, VECTOR_TYPE value) {
   ++(v->size);
 }
 
+void delete_at_vector(Vector *v, size_t index) {
+  if (v == NULL || v->data == NULL || v->DeleteVoidPtr == NULL) {
+    return;
+  }
+  if (index >= v->size) {
+    return;
+  }
+
+  v->DeleteVoidPtr(v->data[index]);
+  for (size_t i = index; i != v->size - 1; ++i) {
+    v->data[i] = v->data[i + 1];
+  }
+  --(v->size);
+}
+
 #endif
