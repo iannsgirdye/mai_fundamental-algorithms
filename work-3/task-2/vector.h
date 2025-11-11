@@ -3,6 +3,9 @@
 
 #include <stdlib.h>
 
+#define TRUE 1
+#define FALSE 0
+
 typedef int VECTOR_TYPE;
 
 typedef struct { 
@@ -35,6 +38,19 @@ void erase_vector(Vector *v) {
   }
   v->size = 0;
   v->capacity = 0;
+}
+
+int is_equal_vector(const Vector *v1, const Vector *v2) {
+  if (v1->size != v2->size) {
+    return FALSE;
+  }
+
+  for (size_t i = 0; i != v1->size; ++i) {
+    if (v1->data[i] != v2->data[i]) {
+      return FALSE;
+    }
+  }
+  return TRUE;
 }
 
 #endif
