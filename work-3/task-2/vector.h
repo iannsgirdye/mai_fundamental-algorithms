@@ -29,7 +29,7 @@ Vector create_vector(size_t initial_capacity, VECTOR_TYPE (*CopyFunc)(VECTOR_TYP
 } 
 
 void erase_vector(Vector *v) {
-  if (v == NULL || v->data == NULL) {
+  if (v == NULL || v->data == NULL || v->DeleteVoidPtr == NULL) {
     return;
   }
 
