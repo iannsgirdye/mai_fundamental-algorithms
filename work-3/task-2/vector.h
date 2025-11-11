@@ -140,10 +140,10 @@
                                                                                                                          \
   VECTOR_TYPE get_at_vector(const Vector *v, size_t index) {                                                             \
     if (v == NULL || v->data == NULL) {                                                                                  \
-      return;                                                                                                            \
+      return 0;                                                                                                            \
     }                                                                                                                    \
     if (index >= v->size) {                                                                                              \
-      return;                                                                                                            \
+      return 0;                                                                                                            \
     }                                                                                                                    \
     return v->data[index];                                                                                               \
   }                                                                                                                      \
