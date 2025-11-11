@@ -111,4 +111,16 @@ Vector *copy_vector_new(const Vector *src) {
   return dest;
 }
 
+void push_back_vector(Vector *v, VECTOR_TYPE value) {
+  if (v == NULL || v->data == NULL) {
+    return;
+  }
+  if (v->size == v->capacity && !_realloc_vector(v, v->capacity * 2)) {
+    return;
+  }
+  
+  v->data[v->size] = value;
+  ++(v->size);
+}
+
 #endif
