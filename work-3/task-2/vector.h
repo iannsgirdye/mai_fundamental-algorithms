@@ -101,4 +101,14 @@ void copy_vector(Vector *dest, const Vector *src) {
   dest->DeleteVoidPtr = src->DeleteVoidPtr;
 }
 
+Vector *copy_vector_new(const Vector *src) {
+  Vector *dest = (Vector *)malloc(sizeof(Vector));
+  if (dest == NULL) {
+    return dest;
+  }
+  *dest = create_vector(0, NULL, NULL);
+  copy_vector(dest, src);
+  return dest;
+}
+
 #endif
