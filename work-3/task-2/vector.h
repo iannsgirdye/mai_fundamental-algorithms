@@ -7,7 +7,6 @@
 #define FALSE 0
 
 #define INCLUDE_VECTOR(VECTOR_TYPE)                                                                                      \
-                                                                                                                         \
   typedef struct {                                                                                                       \
     VECTOR_TYPE *data;                                                                                                   \
     size_t size;                                                                                                         \
@@ -140,10 +139,10 @@
                                                                                                                          \
   VECTOR_TYPE get_at_vector(const Vector *v, size_t index) {                                                             \
     if (v == NULL || v->data == NULL) {                                                                                  \
-      return 0;                                                                                                            \
+      return 0;                                                                                                          \
     }                                                                                                                    \
     if (index >= v->size) {                                                                                              \
-      return 0;                                                                                                            \
+      return 0;                                                                                                          \
     }                                                                                                                    \
     return v->data[index];                                                                                               \
   }                                                                                                                      \
@@ -154,6 +153,6 @@
     }                                                                                                                    \
     erase_vector(v);                                                                                                     \
     free(v);                                                                                                             \
-  }                                                                                                                      \
+  }
 
 #endif
