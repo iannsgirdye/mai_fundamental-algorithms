@@ -46,6 +46,7 @@ void erase_vector(Vector *v) {
   for (size_t i = 0; i != v->size; ++i) {
     v->DeleteVoidPtr(v->data[i]);
   }
+  free(v->data);
   v->size = 0;
   v->capacity = 0;
 }
