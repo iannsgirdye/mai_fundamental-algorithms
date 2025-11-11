@@ -28,6 +28,16 @@ Vector create_vector(size_t initial_capacity, VECTOR_TYPE (*CopyFunc)(VECTOR_TYP
   return v;
 } 
 
+int _realloc_vector(Vector *v, size_t need_capacity) {
+  VECTOR_TYPE *tmp = (VECTOR_TYPE *)realloc(v->data, need_capacity * sizeof(VECTOR_TYPE));
+  if (tmp == NULL) {
+    return FALSE;
+  }
+  v->data = tmp;
+  v->capacity = need_capacity;
+  return TRUE;
+}
+
 void erase_vector(Vector *v) {
   if (v == NULL || v->data == NULL || v->DeleteVoidPtr == NULL) {
     return;
