@@ -7,11 +7,13 @@
 только один тип значений массива. Указатель на функцию копирования (поверхностного или глубокого)
 и удаления необходимо передавать в рамках функции `create_vector` и хранить в структуре `Vector`.
 
+Структура вектора, где `*data` — указатель на элементы, `size` — текущее количество элементов, 
+`capacity` — вместимость (количество выделенных элементов)
 ``` c
 typedef struct {
-  VECTOR_TYPE *data;  // указатель на элементы
-  size_t size;        // текущее количество элементов
-  size_t capacity;    // вместимость (количество выделенных элементов)
+  VECTOR_TYPE *data;
+  size_t size;
+  size_t capacity;
   VECTOR_TYPE (*CopyVoidPtr)(VECTOR_TYPE);
   void (*DeleteVoidPtr)(VECTOR_TYPE);
 } Vector;
@@ -22,12 +24,12 @@ typedef struct {
 Vector create_vector(size_t initial_capacity, VECTOR_TYPE (*CopyFunc)(VECTOR_TYPE), void (*DeleteFunc)(VECTOR_TYPE));
 ```
 
-Удаление внутреннего содержимого вектора (data, size=0, capacity=0)
+Удаление внутреннего содержимого вектора (`data`, `size = 0`, `capacity = 0`)
 ``` c
 void erase_vector(Vector *v);
 ```
 
-Сравнение двух векторов (лексикографически): возвращает 1 — равны, 0 — не равны
+Сравнение двух векторов (лексикографически): возвращает `1` — равны, `0` — не равны
 ``` c
 int is_equal_vector(const Vector *v1, const Vector *v2);
 ```
