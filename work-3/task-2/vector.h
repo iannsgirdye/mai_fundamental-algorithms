@@ -51,7 +51,11 @@ void erase_vector(Vector *v) {
 }
 
 int is_equal_vector(const Vector *v1, const Vector *v2) {
-  if (v1 == NULL || v2 == NULL || v1->data == NULL || v2->data == NULL) {
+  if (v1 == NULL || v2 == NULL) {
+    return FALSE;
+  }
+
+  if ((v1->data == NULL) + (v2->data == NULL) == 1) {
     return FALSE;
   }
   
