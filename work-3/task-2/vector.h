@@ -72,10 +72,13 @@ int is_equal_vector(const Vector *v1, const Vector *v2) {
 }
 
 void copy_vector(Vector *dest, const Vector *src) {
-  if (src == NULL || src->data == NULL || src->CopyVoidPtr == NULL) {
+  if (dest == NULL || src == NULL) {
     return;
   }
-  if (dest == NULL || dest->data == NULL || dest->DeleteVoidPtr == NULL) {
+  if (dest->size > 0 && dest->DeleteVoidPtr == NULL) {
+    return;
+  }
+  if (src->size > 0 && src->CopyVoidPtr == NULL) {
     return;
   }
   if (dest->capacity < src->size) {
@@ -88,11 +91,9 @@ void copy_vector(Vector *dest, const Vector *src) {
     dest->DeleteVoidPtr(dest->data[i]);
     dest->data[i] = src->CopyVoidPtr(src->data[i]);
   }
-
   for (size_t i = dest->size; i != src->size; ++i) {
     dest->data[i] = src->CopyVoidPtr(src->data[i]);
   }
-
   dest->size = src->size;
   dest->capacity = src->capacity;
   dest->CopyVoidPtr = src->CopyVoidPtr;
