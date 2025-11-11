@@ -23,6 +23,18 @@ Vector create_vector(size_t initial_capacity, VECTOR_TYPE (*CopyFunc)(VECTOR_TYP
   v.CopyVoidPtr = CopyFunc;
   v.DeleteVoidPtr = DeleteFunc;
   return v;
+} 
+
+void erase_vector(Vector *v) {
+  if (v == NULL || v->data == NULL) {
+    return;
+  }
+
+  for (size_t i = 0; i != v->size; ++i) {
+    v->DeleteVoidPtr(v->data[i]);
+  }
+  v->size = 0;
+  v->capacity = 0;
 }
 
 #endif
