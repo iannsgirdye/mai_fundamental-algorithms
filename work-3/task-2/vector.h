@@ -67,4 +67,32 @@ int is_equal_vector(const Vector *v1, const Vector *v2) {
   return TRUE;
 }
 
+void copy_vector(Vector *dest, const Vector *src) {
+  if (src == NULL || src->data == NULL || src->CopyVoidPtr == NULL) {
+    return;
+  }
+  if (dest == NULL || dest->data == NULL || dest->DeleteVoidPtr == NULL) {
+    return;
+  }
+  if (dest->capacity < src->size) {
+    if (!_realloc_vector(dest, src->capacity)) {
+      return;
+    }
+  }
+
+  for (size_t i = 0; i != dest->size; ++i) {
+    dest->DeleteVoidPtr(dest->data[i]);
+    dest->data[i] = src->CopyVoidPtr(src->data[i]);
+  }
+
+  for (size_t i = dest->size; i != src->size; ++i) {
+    dest->data[i] = src->CopyVoidPtr(src->data[i]);
+  }
+
+  dest->size = src->size;
+  dest->capacity = src->capacity;
+  dest->CopyVoidPtr = src->CopyVoidPtr;
+  dest->DeleteVoidPtr = src->DeleteVoidPtr;
+}
+
 #endif
