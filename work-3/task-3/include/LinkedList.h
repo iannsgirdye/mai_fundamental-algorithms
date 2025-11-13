@@ -63,7 +63,12 @@
     node->data = value;                                                                                                  \
     node->prev = list->tail;                                                                                             \
     node->next = NULL;                                                                                                   \
-    list->tail->next = node;                                                                                             \
+                                                                                                                         \
+    if (list->size > 0) {                                                                                                \
+      list->tail->next = node;                                                                                           \
+    } else {                                                                                                             \
+      list->head = node;                                                                                                 \
+    }                                                                                                                    \
     list->tail = node;                                                                                                   \
     ++(list->size);                                                                                                      \
   }                                                                                                                      \
