@@ -87,7 +87,14 @@ LIST_TYPE pop_back_list(LinkedList *list) {
 }
 
 // Удаление элемента с начала списка
-double pop_front_list(LinkedList *list);
+LIST_TYPE pop_front_list(LinkedList *list) {
+  Node *node = list->head;
+  LIST_TYPE nodeData = node->data;
+  list->head = node->next;
+  list->head->prev = NULL;
+  free(node);
+  return nodeData;
+}
 
 // Вставка элемента по индексу
 void insert_at_list(LinkedList *list, size_t index, LIST_TYPE value);
