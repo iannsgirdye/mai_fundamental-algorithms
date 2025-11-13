@@ -45,7 +45,17 @@ void delete_list(LinkedList *list) {
 }
 
 // Добавление элемента в конец списка
-void push_back_list(LinkedList *list, LIST_TYPE value);
+void push_back_list(LinkedList *list, LIST_TYPE value) {
+  Node *node = (Node *)malloc(sizeof(Node));
+  if (node == NULL) {
+    return;
+  }
+  node->data = value;
+  node->prev = list->tail;
+  node->next = NULL;
+  list->tail->next = node;
+  list->tail = node;
+}
 
 // Добавление элемента в начало списка
 void push_front_list(LinkedList *list, LIST_TYPE value);
