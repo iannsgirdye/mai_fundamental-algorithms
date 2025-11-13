@@ -35,7 +35,7 @@ typedef struct Node {
 
 Двусвязный список
 ``` c
-  typedef struct {
+typedef struct {
   Node *head; 
   Node *tail;
   size_t size;
@@ -92,7 +92,7 @@ void delete_at_list(LinkedList *list, size_t index);
 double get_at_list(const LinkedList *list, size_t index);
 ```
 
-Сравнение двух списков (лексикографически): возвращает 1 — равны, 0 — не равны
+Сравнение двух списков (лексикографически): возвращает `1` — равны, `0` — не равны
 ``` c
 int is_equal_list(const LinkedList *l1, const LinkedList *l2);
 ```
