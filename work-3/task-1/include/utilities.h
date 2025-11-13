@@ -3,6 +3,7 @@
 
 #include "./returnStatus.h"
 
+returnStatus getNumber(int *number);
 returnStatus getBasePow(int *basePow);
 
 #endif
