@@ -44,6 +44,10 @@ void erase_list(LinkedList *list) {
 
 // Полное удаление списка (освобождение ресурсов)
 void delete_list(LinkedList *list) {
+  if (list == NULL) {
+    return;
+  }
+
   erase_list(list);
   free(list);
 }
