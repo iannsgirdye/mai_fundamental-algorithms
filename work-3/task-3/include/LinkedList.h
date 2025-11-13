@@ -117,7 +117,30 @@ LIST_TYPE pop_front_list(LinkedList *list) {
 }
 
 // Вставка элемента по индексу
-void insert_at_list(LinkedList *list, size_t index, LIST_TYPE value);
+void insert_at_list(LinkedList *list, size_t index, LIST_TYPE value) {
+  if (list == NULL || index >= list->size) {
+    return;
+  }
+
+  Node *newNode = (Node *)malloc(sizeof(Node));
+  if (newNode == NULL) {
+    return;
+  }
+
+  Node *currentNode = list->head;
+  for (size_t i = 0; i != index; ++i) {
+    currentNode = currentNode->next;
+  }
+  
+  newNode->data = value;
+  newNode->prev = currentNode->prev;
+  newNode->next = currentNode;
+  
+  newNode->prev->next = newNode;
+  newNode->next->prev = newNode;
+
+  ++(list->size);
+}
 
 // Удаление элемента по индексу
 void delete_at_list(LinkedList *list, size_t index);
