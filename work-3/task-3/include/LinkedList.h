@@ -3,6 +3,9 @@
 
 #include <stdlib.h>
 
+#define TRUE 1
+#define FALSE 0
+
 typedef double * LIST_TYPE;
 
 typedef struct Node {
@@ -174,6 +177,27 @@ LIST_TYPE get_at_list(const LinkedList *list, size_t index) {
 }
 
 // Сравнение двух списков (лексикографически): возвращает `1` — равны, `0` — не равны
-int is_equal_list(const LinkedList *l1, const LinkedList *l2);
+int is_equal_list(const LinkedList *l1, const LinkedList *l2, int (*Comporator)(LIST_TYPE, LIST_TYPE)) {
+  if (l1 == NULL && l2 == NULL) {
+    return TRUE;
+  }
+  if (l1 == NULL || l2 == NULL) {
+    return FALSE;
+  }
+  if (l1->size != l2->size) {
+    return FALSE;
+  }
+
+  Node *currentNodeList1 = l1->head;
+  Node *currentNodeList2 = l2->head;
+  for (size_t i = 0; i != l1->size; ++i) {
+    if (Comporator(currentNodeList1->data, currentNodeList2->data) != 0) {
+      return FALSE;
+    }
+    currentNodeList1 = currentNodeList1->next;
+    currentNodeList2 = currentNodeList2->next;
+  }
+  return TRUE;
+}
 
 #endif
