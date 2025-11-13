@@ -78,6 +78,10 @@ void push_front_list(LinkedList *list, LIST_TYPE value) {
 
 // Удаление элемента с конца списка 
 LIST_TYPE pop_back_list(LinkedList *list) {
+  if (list == NULL || list->size == 0) {
+    return 0;
+  }
+
   Node *node = list->tail;
   LIST_TYPE nodeData = node->data;
   list->tail = node->prev;
