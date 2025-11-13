@@ -143,7 +143,21 @@ void insert_at_list(LinkedList *list, size_t index, LIST_TYPE value) {
 }
 
 // Удаление элемента по индексу
-void delete_at_list(LinkedList *list, size_t index);
+void delete_at_list(LinkedList *list, size_t index) {
+  if (list == NULL || index >= list->size) {
+    return;
+  }
+
+  Node *currentNode = list->head;
+  for (size_t i = 0; i != index; ++i) {
+    currentNode = currentNode->next;
+  }
+
+  currentNode->prev->next = currentNode->next;
+  currentNode->next->prev = currentNode->prev;
+  free(currentNode);
+  --(list->size);
+}
 
 // Получение элемента по индексу
 double get_at_list(const LinkedList *list, size_t index);
