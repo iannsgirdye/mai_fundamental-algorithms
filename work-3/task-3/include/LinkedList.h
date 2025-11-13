@@ -73,6 +73,7 @@ void push_front_list(LinkedList *list, LIST_TYPE value) {
   node->next = list->head;
   list->head->prev = node;
   list->head = node;
+  ++(list->size);
 }
 
 // Удаление элемента с конца списка 
