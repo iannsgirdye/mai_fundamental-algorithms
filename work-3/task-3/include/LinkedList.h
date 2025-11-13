@@ -59,6 +59,7 @@ void push_back_list(LinkedList *list, LIST_TYPE value) {
   node->next = NULL;
   list->tail->next = node;
   list->tail = node;
+  ++(list->size);
 }
 
 // Добавление элемента в начало списка
