@@ -64,6 +64,10 @@ void push_back_list(LinkedList *list, LIST_TYPE value) {
 
 // Добавление элемента в начало списка
 void push_front_list(LinkedList *list, LIST_TYPE value) {
+  if (list == NULL) {
+    return;
+  }
+
   Node *node = (Node *)malloc(sizeof(Node));
   if (node == NULL) {
     return;
