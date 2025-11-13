@@ -77,7 +77,14 @@ void push_front_list(LinkedList *list, LIST_TYPE value) {
 }
 
 // Удаление элемента с конца списка 
-double pop_back_list(LinkedList *list);
+LIST_TYPE pop_back_list(LinkedList *list) {
+  Node *node = list->tail;
+  LIST_TYPE nodeData = node->data;
+  list->tail = node->prev;
+  list->tail->next = NULL;
+  free(node);
+  return nodeData;  
+}
 
 // Удаление элемента с начала списка
 double pop_front_list(LinkedList *list);
