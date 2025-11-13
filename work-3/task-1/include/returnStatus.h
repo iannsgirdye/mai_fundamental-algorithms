@@ -2,7 +2,7 @@
 #define RETURN_STATUS_H
 
 typedef enum returnStatus {
-  INVALID_BASE = -1,
+  INVALID_BASE_POW = -1,
   OK = 0
 } returnStatus;
 
