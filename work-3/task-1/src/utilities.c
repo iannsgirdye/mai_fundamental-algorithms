@@ -1,5 +1,6 @@
 #include "../include/utilities.h"
 #include "../include/returnStatus.h"
+#include <stdio.h>
 #include <math.h>
 
 #define MIN_BASE_POW 1
