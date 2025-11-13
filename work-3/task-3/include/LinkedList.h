@@ -50,6 +50,10 @@ void delete_list(LinkedList *list) {
 
 // Добавление элемента в конец списка
 void push_back_list(LinkedList *list, LIST_TYPE value) {
+  if (list == NULL) {
+    return;
+  }
+
   Node *node = (Node *)malloc(sizeof(Node));
   if (node == NULL) {
     return;
