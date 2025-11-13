@@ -35,7 +35,10 @@ void erase_list(LinkedList *list) {
 }
 
 // Полное удаление списка (освобождение ресурсов)
-void delete_list(LinkedList *list); 
+void delete_list(LinkedList *list) {
+  erase_list(list);
+  free(list);
+}
 
 // Добавление элемента в конец списка
 void push_back_list(LinkedList *list, LIST_TYPE value);
