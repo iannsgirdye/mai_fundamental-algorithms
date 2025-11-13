@@ -160,7 +160,18 @@ void delete_at_list(LinkedList *list, size_t index) {
 }
 
 // Получение элемента по индексу
-double get_at_list(const LinkedList *list, size_t index);
+LIST_TYPE get_at_list(const LinkedList *list, size_t index) {
+  if (list == NULL || index >= list->size) {
+    return 0;
+  }
+  
+  Node *currentNode = list->head;
+  for (size_t i = 0; i != index; ++i) {
+    currentNode = currentNode->next;
+  }
+
+  return currentNode->data;
+}
 
 // Сравнение двух списков (лексикографически): возвращает `1` — равны, `0` — не равны
 int is_equal_list(const LinkedList *l1, const LinkedList *l2);
