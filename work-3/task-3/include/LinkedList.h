@@ -18,7 +18,10 @@ typedef struct {
 } LinkedList;
 
 // Создание пустого списка
-LinkedList create_list();
+LinkedList create_list() {
+  LinkedList l = {.head = NULL, .tail = NULL, .size = 0};
+  return l;
+}
 
 // Очистка содержимого списка (удаление всех элементов) 
 void erase_list(LinkedList *list);
