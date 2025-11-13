@@ -88,6 +88,10 @@ LIST_TYPE pop_back_list(LinkedList *list) {
 
 // Удаление элемента с начала списка
 LIST_TYPE pop_front_list(LinkedList *list) {
+  if (list == NULL || list->size == 0) {
+    return 0;
+  }
+
   Node *node = list->head;
   LIST_TYPE nodeData = node->data;
   list->head = node->next;
