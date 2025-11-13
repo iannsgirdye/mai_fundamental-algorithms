@@ -27,7 +27,7 @@
 Узел
 ``` c
 typedef struct Node {
-  double* data;
+  double *data;
   struct Node *prev;
   struct Node *next;
 } Node;
