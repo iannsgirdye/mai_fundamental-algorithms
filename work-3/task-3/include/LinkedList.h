@@ -24,7 +24,15 @@ LinkedList create_list() {
 }
 
 // Очистка содержимого списка (удаление всех элементов) 
-void erase_list(LinkedList *list);
+void erase_list(LinkedList *list) {
+  Node *current = list->head;
+  Node *next;
+  for (size_t i = 0; i != list->size; ++i) {
+    next = current->next;
+    free(current);
+    current = next;
+  }
+}
 
 // Полное удаление списка (освобождение ресурсов)
 void delete_list(LinkedList *list); 
