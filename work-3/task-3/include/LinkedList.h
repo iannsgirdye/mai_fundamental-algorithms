@@ -3,10 +3,10 @@
 
 #include <stdlib.h>
 
-typedef double LIST_TYPE;
+typedef double * LIST_TYPE;
 
 typedef struct Node {
-  double *data;
+  LIST_TYPE data;
   struct Node *prev;
   struct Node *next;
 } Node;
