@@ -102,8 +102,15 @@
                                                                                                                          \
     Node *node = list->tail;                                                                                             \
     LIST_TYPE nodeData = node->data;                                                                                     \
+                                                                                                                         \
     list->tail = node->prev;                                                                                             \
-    list->tail->next = NULL;                                                                                             \
+    --(list->size);                                                                                                      \
+    if (list->size == 0) {                                                                                               \
+      list->head = NULL;                                                                                                 \
+    } else {                                                                                                             \
+      list->tail->next = NULL;                                                                                           \
+    }                                                                                                                    \
+                                                                                                                         \
     free(node);                                                                                                          \
     return nodeData;                                                                                                     \
   }                                                                                                                      \
