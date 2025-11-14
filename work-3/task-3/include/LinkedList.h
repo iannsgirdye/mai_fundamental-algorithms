@@ -171,6 +171,14 @@
       return;                                                                                                            \
     }                                                                                                                    \
                                                                                                                          \
+    if (index == 0) {                                                                                                    \
+      STRUCT_NAME##pop_front_list(list);                                                                                 \
+      return;                                                                                                            \
+    } else if (index == list->size - 1) {                                                                                \
+      STRUCT_NAME##pop_back_list(list);                                                                                  \
+      return;                                                                                                            \
+    }                                                                                                                    \
+                                                                                                                         \
     Node *currentNode = list->head;                                                                                      \
     for (size_t i = 0; i != index; ++i) {                                                                                \
       currentNode = currentNode->next;                                                                                   \
