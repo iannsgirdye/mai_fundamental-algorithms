@@ -136,12 +136,20 @@
   }                                                                                                                      \
                                                                                                                          \
   void STRUCT_NAME##_insert_at_list(LinkedList *list, size_t index, LIST_TYPE value) {                                   \
-    if (list == NULL || index >= list->size) {                                                                           \
+    if (list == NULL || index > list->size) {                                                                            \
       return;                                                                                                            \
     }                                                                                                                    \
                                                                                                                          \
     Node *newNode = (Node *)malloc(sizeof(Node));                                                                        \
     if (newNode == NULL) {                                                                                               \
+      return;                                                                                                            \
+    }                                                                                                                    \
+                                                                                                                         \
+    if (index == 0) {                                                                                                    \
+      STRUCT_NAME##push_front_list(list, value);                                                                         \
+      return;                                                                                                            \
+    } else if (index == list->size) {                                                                                    \
+      STRUCT_NAME##push_back_list(list, value);                                                                          \
       return;                                                                                                            \
     }                                                                                                                    \
                                                                                                                          \
@@ -153,10 +161,8 @@
     newNode->data = value;                                                                                               \
     newNode->prev = currentNode->prev;                                                                                   \
     newNode->next = currentNode;                                                                                         \
-                                                                                                                         \
     newNode->prev->next = newNode;                                                                                       \
     newNode->next->prev = newNode;                                                                                       \
-                                                                                                                         \
     ++(list->size);                                                                                                      \
   }                                                                                                                      \
                                                                                                                          \
