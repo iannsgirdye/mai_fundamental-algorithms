@@ -47,7 +47,7 @@
       return;                                                                                                            \
     }                                                                                                                    \
                                                                                                                          \
-    erase_list(list);                                                                                                    \
+    STRUCT_NAME##erase_list(list);                                                                                       \
     free(list);                                                                                                          \
   }                                                                                                                      \
                                                                                                                          \
