@@ -195,6 +195,12 @@
       return 0;                                                                                                          \
     }                                                                                                                    \
                                                                                                                          \
+    if (index == 0) {                                                                                                    \
+      return list->head->data;                                                                                           \
+    } else if (index == list->size - 1) {                                                                                \
+      return list->tail->data;                                                                                           \
+    }                                                                                                                    \
+                                                                                                                         \
     Node *currentNode = list->head;                                                                                      \
     for (size_t i = 0; i != index; ++i) {                                                                                \
       currentNode = currentNode->next;                                                                                   \
